@@ -3,7 +3,7 @@ import './Navbar.css'
 export default function Navbar() {
   return (
     <header className="navbar">
-      <span className="navbar-logo" aria-label="Airbnb clone home">airbnb</span>
+      <span className="navbar-logo">airbnb</span>
       <button type="button" className="navbar-search">
         <span>Anywhere</span>
         <span aria-hidden="true">·</span>
