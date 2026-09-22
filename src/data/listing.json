@@ -1,0 +1,20 @@
+{
+  "id": "listing-1",
+  "title": "Sunlit loft with skyline views",
+  "propertyType": "Entire loft in Brooklyn, New York",
+  "rating": 4.92,
+  "reviewCount": 187,
+  "pricePerNight": 120,
+  "nights": 5,
+  "host": {
+    "name": "Hosted by Sarah",
+    "avatarUrl": "https://i.pravatar.cc/92?img=47",
+    "meta": "Superhost · 4 years hosting"
+  },
+  "guestFavourite": {
+    "title": "Guest favourite",
+    "description": "One of the most loved homes on Airbnb, according to guests",
+    "ratingsCount": 187,
+    "reviewsCount": 187
+  }
+}
