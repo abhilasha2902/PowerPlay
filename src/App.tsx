@@ -33,7 +33,9 @@ export default function App() {
       <PhotoTourOverlay
         photos={photos}
         open={photoTourOpen}
-        onClose={() => setPhotoTourOpen(false)}
+        onClose={() => {
+          if (!lightboxOpen) setPhotoTourOpen(false)
+        }}
         onOpenLightboxAt={openLightboxAt}
       />
       <LightboxOverlay
