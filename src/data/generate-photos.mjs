@@ -5,7 +5,7 @@ const photos = Array.from({ length: 43 }, (_, i) => {
   const category = categories[i % categories.length]
   return {
     id: `photo-${i + 1}`,
-    url: `https://picsum.photos/id/${(1000 + i) % 1084}/1200/800`,
+    url: `https://picsum.photos/seed/photo-${i + 1}/1200/800`,
     alt: `${category} — photo ${i + 1} of 43`,
     category,
   }
