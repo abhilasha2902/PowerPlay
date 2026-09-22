@@ -49,8 +49,18 @@ describe('LightboxOverlay', () => {
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
-  it('moves focus into the dialog as soon as it opens', () => {
-    render(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
+  it('moves focus into the dialog when transitioning from closed to open', () => {
+    // Render closed first, then flip `open` true via rerender — this is the
+    // actual closed->open transition where the focus-trap race lived (a
+    // fresh mount with open=true already has shouldRender=true on the same
+    // render, so it can't exercise the bug that the closed->open rerender
+    // does: shouldRender starts false and only flips true a render later).
+    const { rerender } = render(
+      <LightboxOverlay photos={photos} open={false} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />
+    )
+
+    rerender(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
+
     const dialog = screen.getByRole('dialog')
     expect(dialog).toContainElement(document.activeElement as HTMLElement)
     expect(document.activeElement).not.toBe(document.body)
@@ -61,6 +71,22 @@ describe('LightboxOverlay', () => {
     const nextButton = screen.getByRole('button', { name: 'Next photo' })
     expect(nextButton).not.toBeDisabled()
     expect(nextButton).toHaveAttribute('aria-disabled', 'true')
+  })
+
+  it('does not call onNavigate when clicking the Previous arrow at the first photo', async () => {
+    const user = userEvent.setup()
+    const onNavigate = vi.fn()
+    render(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={onNavigate} />)
+    await user.click(screen.getByRole('button', { name: 'Previous photo' }))
+    expect(onNavigate).not.toHaveBeenCalled()
+  })
+
+  it('does not call onNavigate when clicking the Next arrow at the last photo', async () => {
+    const user = userEvent.setup()
+    const onNavigate = vi.fn()
+    render(<LightboxOverlay photos={photos} open={true} index={2} onClose={vi.fn()} onNavigate={onNavigate} />)
+    await user.click(screen.getByRole('button', { name: 'Next photo' }))
+    expect(onNavigate).not.toHaveBeenCalled()
   })
 
   describe('close fade-out', () => {
