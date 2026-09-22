@@ -40,4 +40,17 @@ describe('useFocusTrap', () => {
     await user.tab({ shift: true })
     expect(screen.getByText('last')).toHaveFocus()
   })
+
+  it('restores focus to the previously focused element when deactivated', () => {
+    const { rerender } = render(<TestOverlay active={false} />)
+    const outsideButton = screen.getByText('outside')
+    outsideButton.focus()
+    expect(outsideButton).toHaveFocus()
+
+    rerender(<TestOverlay active={true} />)
+    expect(screen.getByText('first')).toHaveFocus()
+
+    rerender(<TestOverlay active={false} />)
+    expect(outsideButton).toHaveFocus()
+  })
 })

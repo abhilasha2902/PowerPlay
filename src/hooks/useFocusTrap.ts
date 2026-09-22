@@ -9,6 +9,8 @@ export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, active
     const container = containerRef.current
     if (!container) return
 
+    const previouslyFocused = document.activeElement as HTMLElement | null
+
     const getFocusable = () => Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR))
     const focusable = getFocusable()
     focusable[0]?.focus()
@@ -30,6 +32,9 @@ export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, active
     }
 
     container.addEventListener('keydown', handleKeyDown)
-    return () => container.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      container.removeEventListener('keydown', handleKeyDown)
+      previouslyFocused?.focus()
+    }
   }, [active, containerRef])
 }
