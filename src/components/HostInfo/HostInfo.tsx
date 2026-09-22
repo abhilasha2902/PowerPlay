@@ -10,7 +10,7 @@ export default function HostInfo({ host }: HostInfoProps) {
     <div className="host-info">
       <img className="host-info-avatar" src={host.avatarUrl} alt={`${host.name} profile photo`} />
       <div>
-        <p className="host-info-name">{host.name}</p>
+        <h2 className="host-info-name">{host.name}</h2>
         <p className="host-info-meta">{host.meta}</p>
       </div>
     </div>

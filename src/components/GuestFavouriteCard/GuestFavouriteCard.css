@@ -8,6 +8,11 @@
   margin: 24px 0;
 }
 
+.guest-favourite-icon {
+  flex-shrink: 0;
+  color: var(--ink);
+}
+
 .guest-favourite-title {
   font-size: 15px;
   line-height: 1.15;

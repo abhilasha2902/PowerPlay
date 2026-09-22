@@ -58,7 +58,8 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
       {shouldRender && (
         <>
           <header className="lightbox-header">
-            <span className="lightbox-counter" aria-live="polite" aria-atomic="true">{index + 1} of {photos.length}</span>
+            <span className="lightbox-counter">{index + 1} of {photos.length}</span>
+            <span className="sr-only" aria-live="polite" aria-atomic="true">{photo.alt}, {index + 1} of {photos.length}</span>
             <h2 id="lightbox-title" className="lightbox-title">{photo.category}</h2>
             <div className="lightbox-controls">
               <button type="button" className="lightbox-icon-button" aria-label="Share this photo">⇪</button>

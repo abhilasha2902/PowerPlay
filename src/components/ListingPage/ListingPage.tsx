@@ -17,11 +17,12 @@ interface ListingPageProps {
 export default function ListingPage({ listing, photos, onShowAllPhotos, onOpenLightboxAt }: ListingPageProps) {
   return (
     <div>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <Navbar />
       <div className="listing-page-container">
         <HeroGallery photos={photos} onShowAllPhotos={onShowAllPhotos} onOpenLightboxAt={onOpenLightboxAt} />
         <div className="listing-page-grid">
-          <main>
+          <main id="main-content">
             <ListingHeader
               title={listing.title}
               propertyType={listing.propertyType}

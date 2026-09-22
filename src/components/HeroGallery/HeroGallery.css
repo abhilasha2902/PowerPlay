@@ -48,6 +48,10 @@
   transition: transform 0.05s;
 }
 
+body.kbd .hero-cell:focus-visible {
+  outline-offset: -3px;
+}
+
 .show-all-photos {
   position: absolute;
   right: 24px;

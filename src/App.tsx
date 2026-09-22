@@ -24,20 +24,24 @@ export default function App() {
 
   return (
     <>
-      <ListingPage
-        listing={listing}
-        photos={photos}
-        onShowAllPhotos={() => setPhotoTourOpen(true)}
-        onOpenLightboxAt={openLightboxAt}
-      />
-      <PhotoTourOverlay
-        photos={photos}
-        open={photoTourOpen}
-        onClose={() => {
-          if (!lightboxOpen) setPhotoTourOpen(false)
-        }}
-        onOpenLightboxAt={openLightboxAt}
-      />
+      <div inert={photoTourOpen || lightboxOpen}>
+        <ListingPage
+          listing={listing}
+          photos={photos}
+          onShowAllPhotos={() => setPhotoTourOpen(true)}
+          onOpenLightboxAt={openLightboxAt}
+        />
+      </div>
+      <div inert={lightboxOpen}>
+        <PhotoTourOverlay
+          photos={photos}
+          open={photoTourOpen}
+          onClose={() => {
+            if (!lightboxOpen) setPhotoTourOpen(false)
+          }}
+          onOpenLightboxAt={openLightboxAt}
+        />
+      </div>
       <LightboxOverlay
         photos={photos}
         open={lightboxOpen}

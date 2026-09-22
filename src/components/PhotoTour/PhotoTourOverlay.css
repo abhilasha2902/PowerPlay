@@ -52,6 +52,7 @@
   justify-content: center;
   cursor: pointer;
   transition: background 0.16s;
+  font-size: 16px;
 }
 
 .photo-tour-close:hover {
@@ -132,8 +133,8 @@
   transform: scale(1.03);
 }
 
-.photo-tour-thumb-image:focus-visible,
-.photo-tour-thumb:focus-visible {
+body.kbd .photo-tour-thumb-image:focus-visible,
+body.kbd .photo-tour-thumb:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
