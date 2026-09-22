@@ -50,18 +50,15 @@ export default function PhotoTourOverlay({ photos, open, onClose, onOpenLightbox
           <div className="photo-tour-body">
             <nav className="photo-tour-nav" aria-label="Photo categories">
               {categories.map((category) => (
-                <a
+                <button
                   key={category}
-                  href="#"
+                  type="button"
                   className={category === activeCategory ? 'active' : ''}
                   aria-current={category === activeCategory ? 'true' : undefined}
-                  onClick={(event) => {
-                    event.preventDefault()
-                    setActiveCategory(category)
-                  }}
+                  onClick={() => setActiveCategory(category)}
                 >
                   {category}
-                </a>
+                </button>
               ))}
             </nav>
             <div className="photo-tour-grid">
@@ -76,7 +73,7 @@ export default function PhotoTourOverlay({ photos, open, onClose, onOpenLightbox
                     aria-label={photo.alt}
                   >
                     <span className="photo-tour-thumb-image">
-                      <img src={photo.url} alt={photo.alt} loading="lazy" />
+                      <img src={photo.url} alt="" loading="lazy" />
                     </span>
                   </button>
                 )

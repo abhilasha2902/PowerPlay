@@ -71,7 +71,7 @@
   margin-bottom: 24px;
 }
 
-.photo-tour-nav a {
+.photo-tour-nav button {
   font-size: 14px;
   font-weight: 500;
   padding: 22px 8px;
@@ -80,11 +80,11 @@
   position: relative;
 }
 
-.photo-tour-nav a:hover {
+.photo-tour-nav button:hover {
   color: #000000;
 }
 
-.photo-tour-nav a.active::after {
+.photo-tour-nav button.active::after {
   content: '';
   position: absolute;
   height: 2px;

@@ -48,7 +48,7 @@ describe('PhotoTourOverlay', () => {
       />
     )
 
-    await user.click(screen.getByRole('link', { name: 'Kitchen' }))
+    await user.click(screen.getByRole('button', { name: 'Kitchen' }))
     await user.click(screen.getByRole('button', { name: /Photo B/i }))
 
     expect(onOpenLightboxAt).toHaveBeenCalledWith(1)
