@@ -1,0 +1,12 @@
+.listing-page-container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+.listing-page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 372px;
+  column-gap: 96px;
+  align-items: start;
+}
