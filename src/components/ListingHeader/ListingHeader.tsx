@@ -25,7 +25,7 @@ export default function ListingHeader({ title, propertyType, rating, reviewCount
           <span className="action-button-icon" aria-hidden="true">⇪</span>
           <span className="action-button-label">Share</span>
         </button>
-        <button type="button" className="action-button" aria-pressed="false">
+        <button type="button" className="action-button">
           <span className="action-button-icon" aria-hidden="true">♡</span>
           <span className="action-button-label">Save</span>
         </button>
