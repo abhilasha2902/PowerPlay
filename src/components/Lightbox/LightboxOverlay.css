@@ -100,7 +100,7 @@
   background: var(--grey100);
 }
 
-.lightbox-arrow:disabled {
+.lightbox-arrow[aria-disabled="true"] {
   opacity: 0.4;
   cursor: default;
 }

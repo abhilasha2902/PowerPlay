@@ -18,7 +18,7 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
   const [shouldRender, setShouldRender] = useState(open)
 
   useScrollLock(open)
-  useFocusTrap(containerRef, open)
+  useFocusTrap(containerRef, open && shouldRender)
 
   useEffect(() => {
     if (open) {
@@ -68,8 +68,8 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
           <button
             type="button"
             className="lightbox-arrow lightbox-arrow-prev"
-            onClick={() => onNavigate(index - 1)}
-            disabled={index === 0}
+            onClick={() => { if (index > 0) onNavigate(index - 1) }}
+            aria-disabled={index === 0}
             aria-label="Previous photo"
           >
             ‹
@@ -80,8 +80,8 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
           <button
             type="button"
             className="lightbox-arrow lightbox-arrow-next"
-            onClick={() => onNavigate(index + 1)}
-            disabled={index === photos.length - 1}
+            onClick={() => { if (index < photos.length - 1) onNavigate(index + 1) }}
+            aria-disabled={index === photos.length - 1}
             aria-label="Next photo"
           >
             ›

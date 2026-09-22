@@ -49,6 +49,20 @@ describe('LightboxOverlay', () => {
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
+  it('moves focus into the dialog as soon as it opens', () => {
+    render(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
+    const dialog = screen.getByRole('dialog')
+    expect(dialog).toContainElement(document.activeElement as HTMLElement)
+    expect(document.activeElement).not.toBe(document.body)
+  })
+
+  it('keeps the last-photo Next arrow focusable (aria-disabled, not disabled) so focus cannot escape the trap', () => {
+    render(<LightboxOverlay photos={photos} open={true} index={2} onClose={vi.fn()} onNavigate={vi.fn()} />)
+    const nextButton = screen.getByRole('button', { name: 'Next photo' })
+    expect(nextButton).not.toBeDisabled()
+    expect(nextButton).toHaveAttribute('aria-disabled', 'true')
+  })
+
   describe('close fade-out', () => {
     beforeEach(() => {
       vi.useFakeTimers()
