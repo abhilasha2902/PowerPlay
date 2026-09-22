@@ -78,6 +78,9 @@
   color: var(--ink);
   text-decoration: none;
   position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .photo-tour-nav button:hover {
