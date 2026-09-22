@@ -66,6 +66,17 @@ describe('LightboxOverlay', () => {
     expect(document.activeElement).not.toBe(document.body)
   })
 
+  it('focuses the Close button (not the Share button) when opened via keyboard', () => {
+    const { rerender } = render(
+      <LightboxOverlay photos={photos} open={false} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />
+    )
+
+    rerender(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
+
+    expect(screen.getByRole('button', { name: 'Close lightbox' })).toHaveFocus()
+    expect(screen.getByRole('button', { name: 'Share this photo' })).not.toHaveFocus()
+  })
+
   it('keeps the last-photo Next arrow focusable (aria-disabled, not disabled) so focus cannot escape the trap', () => {
     render(<LightboxOverlay photos={photos} open={true} index={2} onClose={vi.fn()} onNavigate={vi.fn()} />)
     const nextButton = screen.getByRole('button', { name: 'Next photo' })

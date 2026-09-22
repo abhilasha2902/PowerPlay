@@ -13,8 +13,6 @@
   },
   "guestFavourite": {
     "title": "Guest favourite",
-    "description": "One of the most loved homes on Airbnb, according to guests",
-    "ratingsCount": 187,
-    "reviewsCount": 187
+    "description": "One of the most loved homes on Airbnb, according to guests"
   }
 }

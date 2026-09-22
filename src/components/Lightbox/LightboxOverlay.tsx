@@ -14,11 +14,12 @@ interface LightboxOverlayProps {
 
 export default function LightboxOverlay({ photos, open, index, onClose, onNavigate }: LightboxOverlayProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
   const photo = photos[index]
   const [shouldRender, setShouldRender] = useState(open)
 
   useScrollLock(open)
-  useFocusTrap(containerRef, open && shouldRender)
+  useFocusTrap(containerRef, open && shouldRender, closeButtonRef)
 
   useEffect(() => {
     if (open) {
@@ -62,8 +63,17 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
             <span className="sr-only" aria-live="polite" aria-atomic="true">{photo.alt}, {index + 1} of {photos.length}</span>
             <h2 id="lightbox-title" className="lightbox-title">{photo.category}</h2>
             <div className="lightbox-controls">
-              <button type="button" className="lightbox-icon-button" aria-label="Share this photo">⇪</button>
-              <button type="button" className="lightbox-icon-button" onClick={onClose} aria-label="Close lightbox">✕</button>
+              <button type="button" className="lightbox-icon-button" aria-label="Share this photo">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <path d="M12 3v12M7 8l5-5 5 5M5 15v4a2 2 0 002 2h10a2 2 0 002-2v-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <button ref={closeButtonRef} type="button" className="lightbox-icon-button" onClick={onClose} aria-label="Close lightbox">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                </svg>
+              </button>
             </div>
           </header>
           <button
@@ -73,7 +83,9 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
             aria-disabled={index === 0}
             aria-label="Previous photo"
           >
-            ‹
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <polyline points="15 5 9 12 15 19" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
           <div className="lightbox-image-wrap">
             <img src={photo.url} alt={photo.alt} />
@@ -85,7 +97,9 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
             aria-disabled={index === photos.length - 1}
             aria-label="Next photo"
           >
-            ›
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <polyline points="9 5 15 12 9 19" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
         </>
       )}

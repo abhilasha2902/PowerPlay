@@ -15,9 +15,23 @@ export default function PhotoTourOverlay({ photos, open, onClose, onOpenLightbox
   const containerRef = useRef<HTMLDivElement>(null)
   const categories = useMemo(() => ['All photos', ...Array.from(new Set(photos.map((p) => p.category)))], [photos])
   const [activeCategory, setActiveCategory] = useState('All photos')
+  const [shouldRender, setShouldRender] = useState(open)
 
   useScrollLock(open)
-  useFocusTrap(containerRef, open)
+  useFocusTrap(containerRef, open && shouldRender)
+
+  useEffect(() => {
+    if (open) {
+      setShouldRender(true)
+      return
+    }
+    const timer = setTimeout(() => setShouldRender(false), 300) // matches the 0.3s opacity/transform transition
+    return () => clearTimeout(timer)
+  }, [open])
+
+  useEffect(() => {
+    if (open) setActiveCategory('All photos')
+  }, [open])
 
   useEffect(() => {
     if (!open) return
@@ -39,11 +53,14 @@ export default function PhotoTourOverlay({ photos, open, onClose, onOpenLightbox
       aria-label="Photo tour"
       aria-hidden={!open}
     >
-      {open && (
+      {shouldRender && (
         <>
           <header className="photo-tour-header">
             <button type="button" className="photo-tour-close" onClick={onClose} aria-label="Close photo tour">
-              ✕
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
             </button>
             <h2 className="photo-tour-title">Photo tour</h2>
           </header>

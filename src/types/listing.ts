@@ -14,8 +14,6 @@ export interface HostInfo {
 export interface GuestFavourite {
   title: string
   description: string
-  ratingsCount: number
-  reviewsCount: number
 }
 
 export interface Listing {

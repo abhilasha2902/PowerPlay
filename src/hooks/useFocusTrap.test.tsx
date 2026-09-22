@@ -3,6 +3,7 @@ import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { useRef } from 'react'
+import type { RefObject } from 'react'
 import { useFocusTrap } from './useFocusTrap'
 
 function TestOverlay({ active }: { active: boolean }) {
@@ -14,6 +15,21 @@ function TestOverlay({ active }: { active: boolean }) {
       <div ref={ref}>
         <button>first</button>
         <button>last</button>
+      </div>
+    </div>
+  )
+}
+
+function TestOverlayWithInitialFocus({ active }: { active: boolean }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const secondButtonRef = useRef<HTMLButtonElement>(null)
+  useFocusTrap(ref, active, secondButtonRef as RefObject<HTMLElement | null>)
+  return (
+    <div>
+      <button>outside</button>
+      <div ref={ref}>
+        <button>first</button>
+        <button ref={secondButtonRef}>second</button>
       </div>
     </div>
   )
@@ -52,5 +68,11 @@ describe('useFocusTrap', () => {
 
     rerender(<TestOverlay active={false} />)
     expect(outsideButton).toHaveFocus()
+  })
+
+  it('focuses the provided initialFocusRef element instead of the first focusable element', () => {
+    render(<TestOverlayWithInitialFocus active={true} />)
+    expect(screen.getByText('second')).toHaveFocus()
+    expect(screen.getByText('first')).not.toHaveFocus()
   })
 })

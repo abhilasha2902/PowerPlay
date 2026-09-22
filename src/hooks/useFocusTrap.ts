@@ -3,7 +3,11 @@ import type { RefObject } from 'react'
 
 const FOCUSABLE_SELECTOR = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
-export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, active: boolean) {
+export function useFocusTrap(
+  containerRef: RefObject<HTMLElement | null>,
+  active: boolean,
+  initialFocusRef?: RefObject<HTMLElement | null>
+) {
   useEffect(() => {
     if (!active) return
     const container = containerRef.current
@@ -13,7 +17,7 @@ export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, active
 
     const getFocusable = () => Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR))
     const focusable = getFocusable()
-    focusable[0]?.focus()
+    ;(initialFocusRef?.current ?? focusable[0])?.focus()
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key !== 'Tab') return
@@ -36,5 +40,5 @@ export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, active
       container.removeEventListener('keydown', handleKeyDown)
       previouslyFocused?.focus()
     }
-  }, [active, containerRef])
+  }, [active, containerRef, initialFocusRef])
 }
