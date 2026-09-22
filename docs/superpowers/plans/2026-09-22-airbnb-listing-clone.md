@@ -72,7 +72,7 @@ src/
 - Create: `src/data/photos.json`
 - Create: `src/data/listing.json`
 - Modify: `src/main.tsx`
-- Delete: `src/App.css`, `src/App.tsx` (template versions — recreated in Task 11), `src/assets/react.svg` (unused template asset)
+- Note: `src/App.tsx`, `src/App.css`, `src/assets/react.svg`, `src/assets/vite.svg`, `src/assets/hero.png` are left untouched in this task (the template `App.tsx` still imports them) — Task 11 replaces `App.tsx` and deletes the now-unused assets together
 
 **Interfaces:**
 - Produces: `Photo { id: string; url: string; alt: string; category: string }`, `HostInfo { name: string; avatarUrl: string; meta: string }`, `GuestFavourite { title: string; description: string; ratingsCount: number; reviewsCount: number }`, `Listing { id: string; title: string; propertyType: string; rating: number; reviewCount: number; pricePerNight: number; nights: number; host: HostInfo; guestFavourite: GuestFavourite }` — all downstream components consume these.
@@ -267,11 +267,7 @@ Expected: prints `Wrote 43 photos to photos.json` and creates `src/data/photos.j
 }
 ```
 
-- [ ] **Step 10: Delete unused template files**
-
-Run: `rm src/App.css src/assets/react.svg` (keep `src/App.tsx` — it is rewritten in place in Task 11)
-
-- [ ] **Step 11: Point `src/main.tsx` at the new global stylesheet**
+- [ ] **Step 10: Point `src/main.tsx` at the new global stylesheet**
 
 ```tsx
 import { StrictMode } from 'react'
@@ -286,15 +282,16 @@ createRoot(document.getElementById('root')!).render(
 )
 ```
 
-- [ ] **Step 12: Verify the app still builds**
+- [ ] **Step 11: Verify the app still builds**
 
 Run: `npm run build`
-Expected: build succeeds (App.tsx still has template content at this point — that's fine, it's replaced in Task 11).
+Expected: build succeeds. `src/App.tsx` still has the Vite template content at this point (with its own imports of `App.css`, `react.svg`, `vite.svg`, `hero.png`) — do not delete any of those files in this task, or the template build breaks. Task 11 replaces `App.tsx` and deletes the now-unused template assets in the same step.
 
-- [ ] **Step 13: Commit**
+- [ ] **Step 12: Commit**
+
+Git is already initialized (repo root has a `.git` directory and a baseline commit) — do not run `git init`.
 
 ```bash
-git init
 git add -A
 git commit -m "chore: project foundation — tokens, types, mock data, test setup"
 ```
@@ -1893,12 +1890,17 @@ git commit -m "feat: add LightboxOverlay with keyboard navigation and focus trap
 
 **Files:**
 - Modify: `src/App.tsx` (replace template content entirely)
+- Delete: `src/App.css`, `src/assets/react.svg`, `src/assets/vite.svg`, `src/assets/hero.png` (only used by the old template `App.tsx`; safe to delete once it's replaced)
 
 **Interfaces:**
 - Consumes: `ListingPage` (Task 7), `PhotoTourOverlay` (Task 9), `LightboxOverlay` (Task 10), `useKeyboardMode` (Task 8), `listing.json`, `photos.json`.
 - Produces: the app's root render tree — no further consumers, this is the entry point.
 
-- [ ] **Step 1: Replace `src/App.tsx`**
+- [ ] **Step 1: Delete the now-unused template assets**
+
+Run: `rm src/App.css src/assets/react.svg src/assets/vite.svg src/assets/hero.png`
+
+- [ ] **Step 2: Replace `src/App.tsx`**
 
 ```tsx
 import { useState } from 'react'
@@ -1951,24 +1953,24 @@ export default function App() {
 }
 ```
 
-- [ ] **Step 2: Run the full test suite**
+- [ ] **Step 3: Run the full test suite**
 
 Run: `npm run test`
 Expected: PASS (all suites — `useFocusTrap`, `PhotoTourOverlay`, `LightboxOverlay`).
 
-- [ ] **Step 3: Verify build**
+- [ ] **Step 4: Verify build**
 
 Run: `npm run build`
 Expected: build succeeds.
 
-- [ ] **Step 4: Manual smoke test**
+- [ ] **Step 5: Manual smoke test**
 
 Run: `npm run dev`, open the printed local URL, and confirm: hero image click opens Lightbox at that index; "Show all photos" opens Photo Tour; a Photo Tour thumbnail click opens Lightbox at the matching global index; ←/→ move between photos and the counter updates; Escape closes whichever overlay is open.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
-git add src/App.tsx
+git add -A
 git commit -m "feat: wire ListingPage, PhotoTour, and Lightbox together in App"
 ```
 
