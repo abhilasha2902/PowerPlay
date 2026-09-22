@@ -494,13 +494,13 @@ git commit -m "feat: add Navbar component"
   padding: 8px 12px;
   height: auto;
   border-radius: 8px;
-  border: 1px solid #222222;
+  border: 1px solid var(--ink);
   background: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.149);
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
 }
@@ -591,14 +591,14 @@ git commit -m "feat: add HeroGallery component"
   font-size: 26px;
   line-height: 30px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   margin: 0 0 4px;
 }
 
 .listing-header-subtitle {
   font-size: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   margin: 0;
 }
 
@@ -607,14 +607,14 @@ git commit -m "feat: add HeroGallery component"
   align-items: center;
   gap: 4px;
   font-size: 14px;
-  color: #222222;
+  color: var(--ink);
   margin-top: 8px;
 }
 
 .listing-header-rating svg {
   width: 14px;
   height: 14px;
-  fill: #222222;
+  fill: var(--ink);
 }
 
 .listing-header-actions {
@@ -632,7 +632,7 @@ git commit -m "feat: add HeroGallery component"
   background: none;
   font-size: 14px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -747,14 +747,14 @@ git commit -m "feat: add ListingHeader component"
 .host-info-name {
   font-size: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   margin: 0;
 }
 
 .host-info-meta {
   font-size: 14px;
   font-weight: 400;
-  color: #717171;
+  color: var(--muted2);
   margin: 4px 0 0;
 }
 ```
@@ -799,13 +799,13 @@ export default function HostInfo({ host }: HostInfoProps) {
   font-size: 15px;
   line-height: 1.15;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   margin: 0 0 4px;
 }
 
 .guest-favourite-description {
   font-size: 14px;
-  color: #717171;
+  color: var(--muted2);
   margin: 0;
 }
 ```
@@ -882,7 +882,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
 .reserve-widget-price {
   font-size: 22px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -890,7 +890,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
 .reserve-widget-price-unit {
   font-size: 15px;
   font-weight: 400;
-  color: #222222;
+  color: var(--ink);
 }
 
 .reserve-widget-fields {
@@ -912,7 +912,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
 .reserve-widget-field-label {
   font-size: 10px;
   font-weight: 700;
-  color: #222222;
+  color: var(--ink);
   text-transform: uppercase;
   display: block;
   margin-bottom: 2px;
@@ -920,7 +920,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
 
 .reserve-widget-field-value {
   font-size: 14px;
-  color: #222222;
+  color: var(--ink);
 }
 
 .reserve-button {
@@ -950,7 +950,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: #222222;
+  color: var(--ink);
   margin-top: 16px;
 }
 ```
@@ -1372,7 +1372,7 @@ Expected: FAIL — `PhotoTourOverlay` does not exist yet.
   transform: translate(-50%);
   font-size: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
 }
 
 .photo-tour-close {
@@ -1409,7 +1409,7 @@ Expected: FAIL — `PhotoTourOverlay` does not exist yet.
   font-size: 14px;
   font-weight: 500;
   padding: 22px 8px;
-  color: #222222;
+  color: var(--ink);
   text-decoration: none;
   position: relative;
 }
@@ -1422,7 +1422,7 @@ Expected: FAIL — `PhotoTourOverlay` does not exist yet.
   content: '';
   position: absolute;
   height: 2px;
-  background: #222222;
+  background: var(--ink);
   left: 8px;
   right: 8px;
   bottom: 12px;
@@ -1465,7 +1465,7 @@ Expected: FAIL — `PhotoTourOverlay` does not exist yet.
 
 .photo-tour-thumb-image:focus-visible,
 .photo-tour-thumb:focus-visible {
-  outline: 2px solid #222222;
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 ```
@@ -1694,7 +1694,7 @@ Expected: FAIL — `LightboxOverlay` does not exist yet.
 
 .lightbox-counter {
   font-size: 14px;
-  color: #222222;
+  color: var(--ink);
 }
 
 .lightbox-title {
@@ -1703,7 +1703,7 @@ Expected: FAIL — `LightboxOverlay` does not exist yet.
   transform: translate(-50%);
   font-size: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
 }
 
 .lightbox-controls {
@@ -1750,7 +1750,7 @@ Expected: FAIL — `LightboxOverlay` does not exist yet.
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #222222;
+  border: 1px solid var(--ink);
   background: #ffffff;
   display: inline-flex;
   align-items: center;
