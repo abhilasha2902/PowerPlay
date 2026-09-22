@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Photo } from '../../types/listing'
 import { useScrollLock } from '../../hooks/useScrollLock'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
@@ -15,9 +15,19 @@ interface LightboxOverlayProps {
 export default function LightboxOverlay({ photos, open, index, onClose, onNavigate }: LightboxOverlayProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const photo = photos[index]
+  const [shouldRender, setShouldRender] = useState(open)
 
   useScrollLock(open)
   useFocusTrap(containerRef, open)
+
+  useEffect(() => {
+    if (open) {
+      setShouldRender(true)
+      return
+    }
+    const timer = setTimeout(() => setShouldRender(false), 250) // matches the 0.25s opacity transition
+    return () => clearTimeout(timer)
+  }, [open])
 
   useEffect(() => {
     if (!open) return
@@ -42,14 +52,14 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
       className={`lightbox-overlay${open ? ' open' : ''}`}
       role={open ? 'dialog' : undefined}
       aria-modal={open ? true : undefined}
-      aria-label="Photo lightbox"
+      aria-labelledby="lightbox-title"
       aria-hidden={!open}
     >
-      {open && (
+      {shouldRender && (
         <>
           <header className="lightbox-header">
-            <span className="lightbox-counter">{index + 1} of {photos.length}</span>
-            <h2 className="lightbox-title">{photo.category}</h2>
+            <span className="lightbox-counter" aria-live="polite" aria-atomic="true">{index + 1} of {photos.length}</span>
+            <h2 id="lightbox-title" className="lightbox-title">{photo.category}</h2>
             <div className="lightbox-controls">
               <button type="button" className="lightbox-icon-button" aria-label="Share this photo">⇪</button>
               <button type="button" className="lightbox-icon-button" onClick={onClose} aria-label="Close lightbox">✕</button>

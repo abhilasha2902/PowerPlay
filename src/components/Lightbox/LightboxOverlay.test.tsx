@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { act } from 'react'
 import LightboxOverlay from './LightboxOverlay'
 import type { Photo } from '../../types/listing'
 
@@ -46,5 +47,35 @@ describe('LightboxOverlay', () => {
     render(<LightboxOverlay photos={photos} open={true} index={0} onClose={onClose} onNavigate={vi.fn()} />)
     await user.keyboard('{Escape}')
     expect(onClose).toHaveBeenCalledTimes(1)
+  })
+
+  describe('close fade-out', () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+    })
+
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
+    it('keeps content mounted immediately after open becomes false, then unmounts after the fade duration', () => {
+      const { rerender } = render(
+        <LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />
+      )
+      expect(screen.getByText('1 of 3')).toBeInTheDocument()
+
+      rerender(<LightboxOverlay photos={photos} open={false} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
+
+      // Content is still present immediately after `open` flips false, so the
+      // container's opacity transition has something to fade rather than
+      // popping to an empty rectangle.
+      expect(screen.getByText('1 of 3')).toBeInTheDocument()
+
+      act(() => {
+        vi.advanceTimersByTime(250)
+      })
+
+      expect(screen.queryByText('1 of 3')).not.toBeInTheDocument()
+    })
   })
 })
