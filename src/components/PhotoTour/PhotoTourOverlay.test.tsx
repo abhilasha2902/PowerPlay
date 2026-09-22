@@ -30,4 +30,27 @@ describe('PhotoTourOverlay', () => {
     await user.click(screen.getByRole('button', { name: /Photo 2/i }))
     expect(onOpenLightboxAt).toHaveBeenCalledWith(1)
   })
+
+  it('calls onOpenLightboxAt with the global index after filtering by category', async () => {
+    const filterablePhotos: Photo[] = [
+      { id: 'p1', url: 'https://example.com/1.jpg', alt: 'Photo A', category: 'Bedroom' },
+      { id: 'p2', url: 'https://example.com/2.jpg', alt: 'Photo B', category: 'Kitchen' },
+      { id: 'p3', url: 'https://example.com/3.jpg', alt: 'Photo C', category: 'Bedroom' },
+    ]
+    const user = userEvent.setup()
+    const onOpenLightboxAt = vi.fn()
+    render(
+      <PhotoTourOverlay
+        photos={filterablePhotos}
+        open={true}
+        onClose={vi.fn()}
+        onOpenLightboxAt={onOpenLightboxAt}
+      />
+    )
+
+    await user.click(screen.getByRole('link', { name: 'Kitchen' }))
+    await user.click(screen.getByRole('button', { name: /Photo B/i }))
+
+    expect(onOpenLightboxAt).toHaveBeenCalledWith(1)
+  })
 })
