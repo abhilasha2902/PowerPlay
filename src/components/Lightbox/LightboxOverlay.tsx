@@ -59,15 +59,18 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
       {shouldRender && (
         <>
           <header className="lightbox-header">
-            <span className="lightbox-counter">{index + 1} of {photos.length}</span>
-            <span className="sr-only" aria-live="polite" aria-atomic="true">{photo.alt}, {index + 1} of {photos.length}</span>
+            <button type="button" className="lightbox-icon-button" onClick={onClose} aria-label="Back to photo tour">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                <rect x="14" y="3" width="7" height="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                <rect x="3" y="14" width="7" height="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                <rect x="14" y="14" width="7" height="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
+            </button>
             <h2 id="lightbox-title" className="lightbox-title">{photo.category}</h2>
             <div className="lightbox-controls">
-              <button type="button" className="lightbox-icon-button" aria-label="Share this photo">
-                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                  <path d="M12 3v12M7 8l5-5 5 5M5 15v4a2 2 0 002 2h10a2 2 0 002-2v-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
+              <span className="lightbox-counter">{index + 1} of {photos.length}</span>
+              <span className="sr-only" aria-live="polite" aria-atomic="true">{photo.alt}, {index + 1} of {photos.length}</span>
               <button ref={closeButtonRef} type="button" className="lightbox-icon-button" onClick={onClose} aria-label="Close lightbox">
                 <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
                   <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

@@ -66,7 +66,7 @@ describe('LightboxOverlay', () => {
     expect(document.activeElement).not.toBe(document.body)
   })
 
-  it('focuses the Close button (not the Share button) when opened via keyboard', () => {
+  it('focuses the Close button (not the back-to-photo-tour button) when opened via keyboard', () => {
     const { rerender } = render(
       <LightboxOverlay photos={photos} open={false} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />
     )
@@ -74,7 +74,7 @@ describe('LightboxOverlay', () => {
     rerender(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
 
     expect(screen.getByRole('button', { name: 'Close lightbox' })).toHaveFocus()
-    expect(screen.getByRole('button', { name: 'Share this photo' })).not.toHaveFocus()
+    expect(screen.getByRole('button', { name: 'Back to photo tour' })).not.toHaveFocus()
   })
 
   it('keeps the last-photo Next arrow focusable (aria-disabled, not disabled) so focus cannot escape the trap', () => {
