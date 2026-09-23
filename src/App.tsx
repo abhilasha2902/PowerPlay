@@ -1,16 +1,18 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import ListingPage from './components/ListingPage/ListingPage'
 import PhotoTourOverlay from './components/PhotoTour/PhotoTourOverlay'
 import LightboxOverlay from './components/Lightbox/LightboxOverlay'
 import { useKeyboardMode } from './hooks/useKeyboardMode'
 import listingData from './data/listing.json'
-import photosData from './data/photos.json'
-import type { Listing, Photo } from './types/listing'
+import roomsData from './data/rooms.json'
+import type { Listing, Room } from './types/listing'
 
 const listing = listingData as Listing
-const photos = photosData as Photo[]
+const rooms = roomsData as Room[]
 
 export default function App() {
+  const photos = useMemo(() => rooms.flatMap((room) => room.photos), [])
+
   const [photoTourOpen, setPhotoTourOpen] = useState(false)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
@@ -35,6 +37,7 @@ export default function App() {
       <div inert={lightboxOpen}>
         <PhotoTourOverlay
           photos={photos}
+          rooms={rooms}
           open={photoTourOpen}
           onClose={() => {
             if (!lightboxOpen) setPhotoTourOpen(false)
