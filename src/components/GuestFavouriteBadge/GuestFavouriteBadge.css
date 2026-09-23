@@ -1,0 +1,83 @@
+.guest-favourite-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.guest-favourite-badge-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.guest-favourite-badge-label span {
+  width: 60px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.guest-favourite-badge-laurel {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--ink);
+  fill: currentColor;
+}
+
+.guest-favourite-badge-laurel-right {
+  transform: scaleX(-1);
+}
+
+.guest-favourite-badge-description {
+  font-size: 14px;
+  color: var(--ink);
+  max-width: 280px;
+  line-height: 1.4;
+  margin: 0;
+  flex: 1;
+}
+
+.guest-favourite-badge-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.guest-favourite-badge-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.guest-favourite-badge-number {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.guest-favourite-badge-stars {
+  font-size: 14px;
+  color: var(--ink);
+  letter-spacing: 1px;
+}
+
+.guest-favourite-badge-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--line);
+}
+
+.guest-favourite-badge-reviews-label {
+  font-size: 12px;
+  color: var(--muted2);
+}

@@ -72,7 +72,7 @@ src/
 - Create: `src/data/photos.json`
 - Create: `src/data/listing.json`
 - Modify: `src/main.tsx`
-- Delete: `src/App.css`, `src/App.tsx` (template versions — recreated in Task 11), `src/assets/react.svg` (unused template asset)
+- Note: `src/App.tsx`, `src/App.css`, `src/assets/react.svg`, `src/assets/vite.svg`, `src/assets/hero.png` are left untouched in this task (the template `App.tsx` still imports them) — Task 11 replaces `App.tsx` and deletes the now-unused assets together
 
 **Interfaces:**
 - Produces: `Photo { id: string; url: string; alt: string; category: string }`, `HostInfo { name: string; avatarUrl: string; meta: string }`, `GuestFavourite { title: string; description: string; ratingsCount: number; reviewsCount: number }`, `Listing { id: string; title: string; propertyType: string; rating: number; reviewCount: number; pricePerNight: number; nights: number; host: HostInfo; guestFavourite: GuestFavourite }` — all downstream components consume these.
@@ -267,11 +267,7 @@ Expected: prints `Wrote 43 photos to photos.json` and creates `src/data/photos.j
 }
 ```
 
-- [ ] **Step 10: Delete unused template files**
-
-Run: `rm src/App.css src/assets/react.svg` (keep `src/App.tsx` — it is rewritten in place in Task 11)
-
-- [ ] **Step 11: Point `src/main.tsx` at the new global stylesheet**
+- [ ] **Step 10: Point `src/main.tsx` at the new global stylesheet**
 
 ```tsx
 import { StrictMode } from 'react'
@@ -286,15 +282,16 @@ createRoot(document.getElementById('root')!).render(
 )
 ```
 
-- [ ] **Step 12: Verify the app still builds**
+- [ ] **Step 11: Verify the app still builds**
 
 Run: `npm run build`
-Expected: build succeeds (App.tsx still has template content at this point — that's fine, it's replaced in Task 11).
+Expected: build succeeds. `src/App.tsx` still has the Vite template content at this point (with its own imports of `App.css`, `react.svg`, `vite.svg`, `hero.png`) — do not delete any of those files in this task, or the template build breaks. Task 11 replaces `App.tsx` and deletes the now-unused template assets in the same step.
 
-- [ ] **Step 13: Commit**
+- [ ] **Step 12: Commit**
+
+Git is already initialized (repo root has a `.git` directory and a baseline commit) — do not run `git init`.
 
 ```bash
-git init
 git add -A
 git commit -m "chore: project foundation — tokens, types, mock data, test setup"
 ```
@@ -497,13 +494,13 @@ git commit -m "feat: add Navbar component"
   padding: 8px 12px;
   height: auto;
   border-radius: 8px;
-  border: 1px solid #222222;
+  border: 1px solid var(--ink);
   background: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.149);
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
 }
@@ -594,14 +591,14 @@ git commit -m "feat: add HeroGallery component"
   font-size: 26px;
   line-height: 30px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   margin: 0 0 4px;
 }
 
 .listing-header-subtitle {
   font-size: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   margin: 0;
 }
 
@@ -610,14 +607,14 @@ git commit -m "feat: add HeroGallery component"
   align-items: center;
   gap: 4px;
   font-size: 14px;
-  color: #222222;
+  color: var(--ink);
   margin-top: 8px;
 }
 
 .listing-header-rating svg {
   width: 14px;
   height: 14px;
-  fill: #222222;
+  fill: var(--ink);
 }
 
 .listing-header-actions {
@@ -635,7 +632,7 @@ git commit -m "feat: add HeroGallery component"
   background: none;
   font-size: 14px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -750,14 +747,14 @@ git commit -m "feat: add ListingHeader component"
 .host-info-name {
   font-size: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   margin: 0;
 }
 
 .host-info-meta {
   font-size: 14px;
   font-weight: 400;
-  color: #717171;
+  color: var(--muted2);
   margin: 4px 0 0;
 }
 ```
@@ -802,13 +799,13 @@ export default function HostInfo({ host }: HostInfoProps) {
   font-size: 15px;
   line-height: 1.15;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   margin: 0 0 4px;
 }
 
 .guest-favourite-description {
   font-size: 14px;
-  color: #717171;
+  color: var(--muted2);
   margin: 0;
 }
 ```
@@ -885,7 +882,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
 .reserve-widget-price {
   font-size: 22px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -893,7 +890,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
 .reserve-widget-price-unit {
   font-size: 15px;
   font-weight: 400;
-  color: #222222;
+  color: var(--ink);
 }
 
 .reserve-widget-fields {
@@ -915,7 +912,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
 .reserve-widget-field-label {
   font-size: 10px;
   font-weight: 700;
-  color: #222222;
+  color: var(--ink);
   text-transform: uppercase;
   display: block;
   margin-bottom: 2px;
@@ -923,7 +920,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
 
 .reserve-widget-field-value {
   font-size: 14px;
-  color: #222222;
+  color: var(--ink);
 }
 
 .reserve-button {
@@ -953,7 +950,7 @@ git commit -m "feat: add HostInfo and GuestFavouriteCard components"
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  color: #222222;
+  color: var(--ink);
   margin-top: 16px;
 }
 ```
@@ -1375,7 +1372,7 @@ Expected: FAIL — `PhotoTourOverlay` does not exist yet.
   transform: translate(-50%);
   font-size: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
 }
 
 .photo-tour-close {
@@ -1412,7 +1409,7 @@ Expected: FAIL — `PhotoTourOverlay` does not exist yet.
   font-size: 14px;
   font-weight: 500;
   padding: 22px 8px;
-  color: #222222;
+  color: var(--ink);
   text-decoration: none;
   position: relative;
 }
@@ -1425,7 +1422,7 @@ Expected: FAIL — `PhotoTourOverlay` does not exist yet.
   content: '';
   position: absolute;
   height: 2px;
-  background: #222222;
+  background: var(--ink);
   left: 8px;
   right: 8px;
   bottom: 12px;
@@ -1468,7 +1465,7 @@ Expected: FAIL — `PhotoTourOverlay` does not exist yet.
 
 .photo-tour-thumb-image:focus-visible,
 .photo-tour-thumb:focus-visible {
-  outline: 2px solid #222222;
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 ```
@@ -1697,7 +1694,7 @@ Expected: FAIL — `LightboxOverlay` does not exist yet.
 
 .lightbox-counter {
   font-size: 14px;
-  color: #222222;
+  color: var(--ink);
 }
 
 .lightbox-title {
@@ -1706,7 +1703,7 @@ Expected: FAIL — `LightboxOverlay` does not exist yet.
   transform: translate(-50%);
   font-size: 16px;
   font-weight: 500;
-  color: #222222;
+  color: var(--ink);
 }
 
 .lightbox-controls {
@@ -1753,7 +1750,7 @@ Expected: FAIL — `LightboxOverlay` does not exist yet.
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #222222;
+  border: 1px solid var(--ink);
   background: #ffffff;
   display: inline-flex;
   align-items: center;
@@ -1893,12 +1890,17 @@ git commit -m "feat: add LightboxOverlay with keyboard navigation and focus trap
 
 **Files:**
 - Modify: `src/App.tsx` (replace template content entirely)
+- Delete: `src/App.css`, `src/assets/react.svg`, `src/assets/vite.svg`, `src/assets/hero.png` (only used by the old template `App.tsx`; safe to delete once it's replaced)
 
 **Interfaces:**
 - Consumes: `ListingPage` (Task 7), `PhotoTourOverlay` (Task 9), `LightboxOverlay` (Task 10), `useKeyboardMode` (Task 8), `listing.json`, `photos.json`.
 - Produces: the app's root render tree — no further consumers, this is the entry point.
 
-- [ ] **Step 1: Replace `src/App.tsx`**
+- [ ] **Step 1: Delete the now-unused template assets**
+
+Run: `rm src/App.css src/assets/react.svg src/assets/vite.svg src/assets/hero.png`
+
+- [ ] **Step 2: Replace `src/App.tsx`**
 
 ```tsx
 import { useState } from 'react'
@@ -1951,24 +1953,24 @@ export default function App() {
 }
 ```
 
-- [ ] **Step 2: Run the full test suite**
+- [ ] **Step 3: Run the full test suite**
 
 Run: `npm run test`
 Expected: PASS (all suites — `useFocusTrap`, `PhotoTourOverlay`, `LightboxOverlay`).
 
-- [ ] **Step 3: Verify build**
+- [ ] **Step 4: Verify build**
 
 Run: `npm run build`
 Expected: build succeeds.
 
-- [ ] **Step 4: Manual smoke test**
+- [ ] **Step 5: Manual smoke test**
 
 Run: `npm run dev`, open the printed local URL, and confirm: hero image click opens Lightbox at that index; "Show all photos" opens Photo Tour; a Photo Tour thumbnail click opens Lightbox at the matching global index; ←/→ move between photos and the counter updates; Escape closes whichever overlay is open.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
-git add src/App.tsx
+git add -A
 git commit -m "feat: wire ListingPage, PhotoTour, and Lightbox together in App"
 ```
 
@@ -2014,7 +2016,8 @@ git commit -m "fix: address pixel-diff and a11y review findings"
 
 ## Self-Review Notes
 
-- **Spec coverage:** 1.1 typography → Tasks 2–7 (each component's CSS cites its exact table rows). 1.2 color tokens → Task 1 `tokens.css`. 1.3 hero grid → Task 3. 1.4 layout/spacing → Tasks 2–7 (container/grid in Task 7, per-component spacing in Tasks 2–6). 1.5 share/save → Task 4. 1.6 reserve button → Task 6. 2.1–2.6 hover states → embedded in the CSS of the matching component task (2.1/2.2 → Task 3, 2.3 → Task 4, 2.4/1.6 → Task 6, 2.5 → Task 2, 2.6 → Task 2, 2.7 → Task 9). Section 3 (Photo Tour) → Task 9. Section 4 (Lightbox) → Task 10, including 4.5 keyboard nav and 4.6 focus rings (global rule in Task 1, thumbnail-specific offset in Task 9). Section 5 (Responsive) → intentionally excluded per Global Constraints (desktop only, per user scope). Appendix reduced-motion → Task 1 `global.css`.
+- **Spec coverage:** 1.1 typography → Tasks 2–7 (each component's CSS cites its exact table rows), **except** the "Price value" (`._aykCAY`, 15px/1.2/500) and "Price sub-label" (`._FVmwas`, 13px/1.2/400, `"for 5 nights"`) rows — the real site appears to render these as a distinct compact price display elsewhere on the page (not the `ReserveWidget`'s own 22px price or 14px subtotal line, both built from other spec rows), and no task in this plan builds that additional element; left unassigned, not applied anywhere. 1.2 color tokens → Task 1 `tokens.css`. 1.3 hero grid → Task 3. 1.4 layout/spacing → Tasks 2–7 (container/grid in Task 7, per-component spacing in Tasks 2–6). 1.5 share/save → Task 4. 1.6 reserve button → Task 6, **except** the "Small variant" (40px height/14px font/`0 20px` padding) — likely the mobile-breakpoint reserve control per spec Section 5, correctly out of scope under the desktop-only Global Constraint, but not explicitly named as such until this correction. 2.1–2.6 hover states → embedded in the CSS of the matching component task (2.1/2.2 → Task 3, 2.3 → Task 4, 2.4/1.6 → Task 6, 2.5 → Task 2, 2.6 → Task 2, 2.7 → Task 9). Section 3 (Photo Tour) → Task 9. Section 4 (Lightbox) → Task 10, including 4.5 keyboard nav and 4.6 focus rings (global rule in Task 1, thumbnail-specific offset in Task 9). Section 5 (Responsive) → intentionally excluded per Global Constraints (desktop only, per user scope). Appendix reduced-motion → Task 1 `global.css`.
+- **Correction (found by the final whole-branch review, post-Task-12):** the two 1.1 rows and the 1.6 small-variant row above were originally omitted from this note entirely rather than declared out of scope like the sub-nav and amenities grid were — an inaccurate completeness claim that a final review, not any of the twelve task reviews, was the only gate positioned to catch. No code changed as a result: verified the app genuinely doesn't need these rows (no compact secondary price display or mobile reserve button exists anywhere in this desktop-only build), so this is a documentation-only fix.
 - **Out of scope, by design:** the sticky sub-nav mentioned only by height in spec 1.4 (`_JXzroy`, 88px) and the amenities grid mentioned only in the responsive table (spec 5.2) are not built — neither has enough non-responsive spec detail to implement without inventing content not in the source of truth.
 - **Placeholder scan:** no TBD/TODO markers; every step has runnable code or an exact shell command.
 - **Type consistency:** `Photo`, `HostInfo`, `GuestFavourite`, `Listing` defined once in Task 1 and used with identical field names through Tasks 3–11 (`onOpenLightboxAt(index: number)` and `onNavigate(index: number)` signatures match between `HeroGallery`, `PhotoTourOverlay`, `LightboxOverlay`, and `App.tsx`).

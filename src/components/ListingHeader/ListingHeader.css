@@ -1,0 +1,61 @@
+.listing-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 32px 0 18px;
+}
+
+.listing-header-title {
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+.listing-header-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.action-button:hover {
+  background: var(--grey200);
+}
+
+.action-button:active {
+  transform: scale(0.96);
+  transition: transform 0.05s;
+}
+
+.action-button-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+}
+
+.action-button-icon.saved {
+  color: #ff385c;
+}
+
+.action-button-label {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

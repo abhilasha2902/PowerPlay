@@ -1,0 +1,41 @@
+.listing-page-container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 80px 64px;
+}
+
+.listing-page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 372px;
+  column-gap: 96px;
+  align-items: start;
+}
+
+.skip-link {
+  position: fixed;
+  top: -40px;
+  left: 8px;
+  background: #ffffff;
+  color: var(--ink);
+  padding: 8px 16px;
+  border-radius: 8px;
+  z-index: 10;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+@media (max-width: 1128px) {
+  .listing-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reserve-widget {
+    display: none;
+  }
+}

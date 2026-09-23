@@ -1,0 +1,22 @@
+{
+  "id": "listing-1",
+  "title": "Romantic Jacuzzi 1BHK Candolim | Mirashya UG10",
+  "propertyType": "Entire serviced apartment in Candolim, India",
+  "guests": 3,
+  "bedrooms": 1,
+  "beds": 1,
+  "bathrooms": 1,
+  "rating": 4.95,
+  "reviewCount": 19,
+  "pricePerNight": 4200,
+  "nights": 5,
+  "host": {
+    "name": "Hosted by Sarah",
+    "avatarUrl": "https://i.pravatar.cc/92?img=47",
+    "meta": "Superhost · 4 years hosting"
+  },
+  "guestFavourite": {
+    "title": "Guest favourite",
+    "description": "One of the most loved homes on Airbnb, according to guests"
+  }
+}

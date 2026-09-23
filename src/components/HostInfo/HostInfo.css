@@ -1,0 +1,28 @@
+.host-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.host-info-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.host-info-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+.host-info-meta {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted2);
+  margin: 4px 0 0;
+}

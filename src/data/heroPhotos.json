@@ -1,0 +1,7 @@
+[
+  { "id": "hero-1", "url": "https://images.unsplash.com/photo-1758448755856-01d3add0177b?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Living room lounge area", "category": "Living room 1" },
+  { "id": "hero-2", "url": "https://images.unsplash.com/photo-1749930206000-179d0b85aa7e?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Living room lounge area close-up", "category": "Living room 1" },
+  { "id": "hero-3", "url": "https://images.unsplash.com/photo-1754574741164-a41418029cfb?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Jacuzzi with stone surround", "category": "Full bathroom" },
+  { "id": "hero-4", "url": "https://images.unsplash.com/photo-1746549855427-57e6da7040db?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Bedroom with curtains and ceiling fan", "category": "Bedroom" },
+  { "id": "hero-5", "url": "https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Building exterior", "category": "Exterior" }
+]

@@ -1,0 +1,100 @@
+.reserve-widget {
+  width: 372px;
+  position: sticky;
+  top: 100px;
+  padding: 22px 24px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-card);
+}
+
+.reserve-widget-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.reserve-widget-price {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.reserve-widget-price-unit {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.reserve-widget-fields {
+  border: 1px solid #b0b0b0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.reserve-widget-field {
+  padding: 10px 12px;
+  border-bottom: 1px solid #b0b0b0;
+}
+
+.reserve-widget-field:last-child {
+  border-bottom: none;
+}
+
+.reserve-widget-field-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.reserve-widget-field-value {
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.reserve-button {
+  width: 100%;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  background: var(--reserve);
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.reserve-button:hover {
+  background: var(--reserve-hover);
+}
+
+.reserve-button:active {
+  transform: scale(0.985);
+  transition: transform 0.05s;
+}
+
+.reserve-widget-subtotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--ink);
+  margin-top: 16px;
+}
+
+.reserve-widget-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--ink);
+  margin-top: 16px;
+}
