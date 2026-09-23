@@ -126,3 +126,36 @@
 .lightbox-arrow-next {
   right: 20px;
 }
+
+@media (max-width: 1128px) {
+  .lightbox-image-wrap {
+    padding: 80px 56px;
+  }
+}
+
+@media (max-width: 743px) {
+  .lightbox-header {
+    padding: 0 12px;
+  }
+
+  .lightbox-title {
+    display: none;
+  }
+
+  .lightbox-image-wrap {
+    padding: 72px 16px;
+  }
+
+  .lightbox-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .lightbox-arrow-prev {
+    left: 8px;
+  }
+
+  .lightbox-arrow-next {
+    right: 8px;
+  }
+}

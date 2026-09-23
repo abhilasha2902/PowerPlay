@@ -146,7 +146,17 @@
   transform: scale(0.9);
 }
 
+@media (max-width: 1128px) {
+  .navbar {
+    padding: 0 32px;
+  }
+}
+
 @media (max-width: 743px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
   .navbar-search,
   .navbar-host-link {
     display: none;
