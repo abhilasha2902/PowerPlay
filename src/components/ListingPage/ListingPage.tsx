@@ -3,8 +3,8 @@ import Navbar from '../Navbar/Navbar'
 import HeroGallery from '../HeroGallery/HeroGallery'
 import ListingHeader from '../ListingHeader/ListingHeader'
 import ListingDetails from '../ListingDetails/ListingDetails'
+import GuestFavouriteBadge from '../GuestFavouriteBadge/GuestFavouriteBadge'
 import HostInfo from '../HostInfo/HostInfo'
-import GuestFavouriteCard from '../GuestFavouriteCard/GuestFavouriteCard'
 import ReserveWidget from '../ReserveWidget/ReserveWidget'
 import './ListingPage.css'
 
@@ -31,11 +31,14 @@ export default function ListingPage({ listing, photos, onShowAllPhotos, onOpenLi
               bedrooms={listing.bedrooms}
               beds={listing.beds}
               bathrooms={listing.bathrooms}
+            />
+            <GuestFavouriteBadge
+              title={listing.guestFavourite.title}
+              description={listing.guestFavourite.description}
               rating={listing.rating}
               reviewCount={listing.reviewCount}
             />
             <HostInfo host={listing.host} />
-            <GuestFavouriteCard favourite={listing.guestFavourite} />
           </main>
           <ReserveWidget
             pricePerNight={listing.pricePerNight}
