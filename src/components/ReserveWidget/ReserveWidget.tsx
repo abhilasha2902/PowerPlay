@@ -13,7 +13,7 @@ export default function ReserveWidget({ pricePerNight, nights, rating, reviewCou
   return (
     <aside className="reserve-widget" aria-label="Reservation">
       <div className="reserve-widget-price-row">
-        <span className="reserve-widget-price">${pricePerNight}</span>
+        <span className="reserve-widget-price">₹{pricePerNight.toLocaleString('en-IN')}</span>
         <span className="reserve-widget-price-unit">night</span>
       </div>
       <div className="reserve-widget-fields">
@@ -32,8 +32,8 @@ export default function ReserveWidget({ pricePerNight, nights, rating, reviewCou
       </div>
       <button type="button" className="reserve-button">Reserve</button>
       <div className="reserve-widget-subtotal">
-        <span>${pricePerNight} x {nights} nights</span>
-        <span>${total}</span>
+        <span>₹{pricePerNight.toLocaleString('en-IN')} x {nights} nights</span>
+        <span>₹{total.toLocaleString('en-IN')}</span>
       </div>
       <div className="reserve-widget-rating">
         <svg viewBox="0 0 32 32" width="14" height="14" aria-hidden="true">
