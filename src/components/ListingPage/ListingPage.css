@@ -29,3 +29,13 @@
 .skip-link:focus {
   top: 8px;
 }
+
+@media (max-width: 1128px) {
+  .listing-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reserve-widget {
+    display: none;
+  }
+}
