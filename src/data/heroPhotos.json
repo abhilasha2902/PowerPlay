@@ -1,0 +1,7 @@
+[
+  { "id": "hero-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/2367476f-11c4-4a14-a7c6-267be62c1d59.jpeg", "alt": "Living room lounge area", "category": "Living room 1" },
+  { "id": "hero-2", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/090d8b0b-b539-42c0-84f8-e1fb0cdf9a93.jpeg", "alt": "Living room lounge area close-up", "category": "Living room 1" },
+  { "id": "hero-3", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/9be71047-fc52-438a-9270-75cb470f6752.jpeg", "alt": "Jacuzzi with stone surround", "category": "Full bathroom" },
+  { "id": "hero-4", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/67c61c6f-6260-4809-9510-0360e58a345d.jpeg", "alt": "Bedroom with curtains and ceiling fan", "category": "Bedroom" },
+  { "id": "hero-5", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/c904e1ab-a39d-4ef0-bdea-8c0bd16b9e3d.jpeg", "alt": "Building exterior", "category": "Exterior" }
+]

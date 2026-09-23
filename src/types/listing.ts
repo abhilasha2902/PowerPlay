@@ -9,6 +9,7 @@ export interface Room {
   id: string
   name: string
   amenities: string | null
+  thumbnailUrl: string
   photos: Photo[]
 }
 

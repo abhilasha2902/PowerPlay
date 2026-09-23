@@ -5,13 +5,14 @@ import LightboxOverlay from './components/Lightbox/LightboxOverlay'
 import { useKeyboardMode } from './hooks/useKeyboardMode'
 import listingData from './data/listing.json'
 import roomsData from './data/rooms.json'
-import type { Listing, Room } from './types/listing'
+import heroPhotosData from './data/heroPhotos.json'
+import type { Listing, Photo, Room } from './types/listing'
 
 const listing = listingData as Listing
 const rooms = roomsData as Room[]
 
 export default function App() {
-  const photos = useMemo(() => rooms.flatMap((room) => room.photos), [])
+  const photos = useMemo(() => [...(heroPhotosData as Photo[]), ...rooms.flatMap((room) => room.photos)], [])
 
   const [photoTourOpen, setPhotoTourOpen] = useState(false)
   const [lightboxOpen, setLightboxOpen] = useState(false)

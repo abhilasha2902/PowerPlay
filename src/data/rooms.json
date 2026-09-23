@@ -3,72 +3,81 @@
     "id": "living-room-1",
     "name": "Living room 1",
     "amenities": "Sofa · Air conditioning · Ceiling fan · TV",
+    "thumbnailUrl": "https://airbnb-clone-umber-two.vercel.app/assets/images/a9831aeb-f441-44f5-a38f-4cf54e3f0fcf.jpeg",
     "photos": [
-      { "id": "living-room-1-1", "url": "https://images.unsplash.com/photo-1758448755856-01d3add0177b?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Living room 1", "category": "Living room 1" }
+      { "id": "living-room-1-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/67c61c6f-6260-4809-9510-0360e58a345d.jpeg", "alt": "Living room 1", "category": "Living room 1" }
     ]
   },
   {
     "id": "living-room-2",
     "name": "Living room 2",
     "amenities": "Ceiling fan · Hot tub",
+    "thumbnailUrl": "https://airbnb-clone-umber-two.vercel.app/assets/images/090d8b0b-b539-42c0-84f8-e1fb0cdf9a93.jpeg",
     "photos": [
-      { "id": "living-room-2-1", "url": "https://images.unsplash.com/photo-1749930206000-179d0b85aa7e?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Living room 2", "category": "Living room 2" }
+      { "id": "living-room-2-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/f1da1c3d-0d10-481e-9b63-c71f9073f30b.jpeg", "alt": "Living room 2", "category": "Living room 2" }
     ]
   },
   {
     "id": "full-kitchen",
     "name": "Full kitchen",
     "amenities": "Refrigerator · Microwave · Cooking basics",
+    "thumbnailUrl": "https://airbnb-clone-umber-two.vercel.app/assets/images/56c44812-52c0-4481-90d8-101ec1f34c7a.jpeg",
     "photos": [
-      { "id": "full-kitchen-1", "url": "https://images.unsplash.com/photo-1764526624453-db32c24eca55?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Full kitchen", "category": "Full kitchen" }
+      { "id": "full-kitchen-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/3c6e6809-1bb1-47a6-8e24-aff593e1c28f.jpeg", "alt": "Full kitchen", "category": "Full kitchen" }
     ]
   },
   {
     "id": "bedroom",
     "name": "Bedroom",
     "amenities": "Bed · Air conditioning · Wardrobe",
+    "thumbnailUrl": "https://airbnb-clone-umber-two.vercel.app/assets/images/67c61c6f-6260-4809-9510-0360e58a345d.jpeg",
     "photos": [
-      { "id": "bedroom-1", "url": "https://images.unsplash.com/photo-1746549855427-57e6da7040db?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Bedroom", "category": "Bedroom" }
+      { "id": "bedroom-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/ddc853d7-e658-405c-bedc-8f31106c447e.jpeg", "alt": "Bedroom", "category": "Bedroom" }
     ]
   },
   {
     "id": "full-bathroom",
     "name": "Full bathroom",
     "amenities": "Bathtub · Hot water · Hair dryer",
+    "thumbnailUrl": "https://airbnb-clone-umber-two.vercel.app/assets/images/97c78f8a-5090-4663-aebc-ba4e13b47092.jpeg",
     "photos": [
-      { "id": "full-bathroom-1", "url": "https://images.unsplash.com/photo-1754574741164-a41418029cfb?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Full bathroom", "category": "Full bathroom" }
+      { "id": "full-bathroom-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/3cf31697-f3f3-4c60-82c4-029acb119ae4.jpeg", "alt": "Full bathroom", "category": "Full bathroom" }
     ]
   },
   {
     "id": "gym",
     "name": "Gym",
     "amenities": "Exercise equipment",
+    "thumbnailUrl": "https://airbnb-clone-umber-two.vercel.app/assets/images/9aa8e65f-94ac-4ba0-9a10-9ec91e536d22.jpeg",
     "photos": [
-      { "id": "gym-1", "url": "https://images.unsplash.com/photo-1758957646695-ec8bce3df462?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Gym", "category": "Gym" }
+      { "id": "gym-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/97c78f8a-5090-4663-aebc-ba4e13b47092.jpeg", "alt": "Gym", "category": "Gym" }
     ]
   },
   {
     "id": "exterior",
     "name": "Exterior",
     "amenities": "Garden view · Parking",
+    "thumbnailUrl": "https://airbnb-clone-umber-two.vercel.app/assets/images/23ea6621-6f74-4baa-acea-2fd03e312b41.jpeg",
     "photos": [
-      { "id": "exterior-1", "url": "https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Exterior", "category": "Exterior" }
+      { "id": "exterior-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/f19d8c0a-1d88-42a4-9218-686d4f0db7e4.jpeg", "alt": "Exterior", "category": "Exterior" }
     ]
   },
   {
     "id": "pool",
     "name": "Pool",
     "amenities": "Pool",
+    "thumbnailUrl": "https://airbnb-clone-umber-two.vercel.app/assets/images/fc02f48f-a937-42c5-895d-f9cc3113d6ca.jpeg",
     "photos": [
-      { "id": "pool-1", "url": "https://images.unsplash.com/photo-1680013995061-2d6d1f3ab417?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Pool", "category": "Pool" }
+      { "id": "pool-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/42befad7-fb29-473d-91db-b03e7a544d1d.jpeg", "alt": "Pool", "category": "Pool" }
     ]
   },
   {
     "id": "additional-photos",
     "name": "Additional photos",
     "amenities": null,
+    "thumbnailUrl": "https://airbnb-clone-umber-two.vercel.app/assets/images/70325367-cbae-4993-b560-18cd3f6edd53.jpeg",
     "photos": [
-      { "id": "additional-1", "url": "https://images.unsplash.com/photo-1645587593689-e7cde7c5d9db?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Additional photo 1", "category": "Additional photos" },
+      { "id": "additional-1", "url": "https://airbnb-clone-umber-two.vercel.app/assets/images/8eb65a8b-e795-4870-b141-6f63b1be24ae.jpeg", "alt": "Additional photo 1", "category": "Additional photos" },
       { "id": "additional-2", "url": "https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Additional photo 2", "category": "Additional photos" }
     ]
   }

@@ -2,6 +2,7 @@ import type { Listing, Photo } from '../../types/listing'
 import Navbar from '../Navbar/Navbar'
 import HeroGallery from '../HeroGallery/HeroGallery'
 import ListingHeader from '../ListingHeader/ListingHeader'
+import ListingDetails from '../ListingDetails/ListingDetails'
 import HostInfo from '../HostInfo/HostInfo'
 import GuestFavouriteCard from '../GuestFavouriteCard/GuestFavouriteCard'
 import ReserveWidget from '../ReserveWidget/ReserveWidget'
@@ -20,11 +21,11 @@ export default function ListingPage({ listing, photos, onShowAllPhotos, onOpenLi
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <Navbar />
       <div className="listing-page-container">
+        <ListingHeader title={listing.title} />
         <HeroGallery photos={photos} onShowAllPhotos={onShowAllPhotos} onOpenLightboxAt={onOpenLightboxAt} />
         <div className="listing-page-grid">
           <main id="main-content">
-            <ListingHeader
-              title={listing.title}
+            <ListingDetails
               propertyType={listing.propertyType}
               guests={listing.guests}
               bedrooms={listing.bedrooms}

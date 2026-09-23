@@ -12,8 +12,8 @@ const photos: Photo[] = [
 ]
 
 const rooms: Room[] = [
-  { id: 'room-a', name: 'Room A', amenities: 'Sofa · TV', photos: [photos[0]] },
-  { id: 'room-b', name: 'Room B', amenities: 'Bed', photos: [photos[1], photos[2]] },
+  { id: 'room-a', name: 'Room A', amenities: 'Sofa · TV', thumbnailUrl: 'https://example.com/room-a-thumb.jpg', photos: [photos[0]] },
+  { id: 'room-b', name: 'Room B', amenities: 'Bed', thumbnailUrl: 'https://example.com/room-b-thumb.jpg', photos: [photos[1], photos[2]] },
 ]
 
 describe('PhotoTourOverlay', () => {
@@ -54,7 +54,7 @@ describe('PhotoTourOverlay', () => {
   })
 
   it('renders room headings and amenities, omitting the amenities line when null', () => {
-    const roomsWithNoAmenities: Room[] = [...rooms, { id: 'extra', name: 'Extra', amenities: null, photos: [photos[0]] }]
+    const roomsWithNoAmenities: Room[] = [...rooms, { id: 'extra', name: 'Extra', amenities: null, thumbnailUrl: 'https://example.com/extra-thumb.jpg', photos: [photos[0]] }]
     render(<PhotoTourOverlay photos={photos} rooms={roomsWithNoAmenities} open={true} onClose={vi.fn()} onOpenLightboxAt={vi.fn()} />)
     expect(screen.getByText('Sofa · TV')).toBeInTheDocument()
     expect(screen.getAllByRole('heading', { name: 'Extra' })).toHaveLength(1)

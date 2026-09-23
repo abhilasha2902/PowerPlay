@@ -28,20 +28,21 @@ describe('App', () => {
     const user = userEvent.setup()
     render(<App />)
 
-    // Hero cells 1-5 are the first 5 flattened photos: Living room 1, Living room 2,
-    // Full kitchen, Bedroom, Full bathroom. Click the 3rd (index 2, "Full kitchen").
-    await user.click(screen.getByRole('button', { name: 'Open photo 3 in lightbox: Full kitchen' }))
+    // Hero cells 1-5 are the first 5 flattened photos: the 5 heroPhotos entries
+    // (hero-1..hero-5), prepended ahead of the room photos. Click the 3rd (index 2, "Full bathroom" category).
+    await user.click(screen.getByRole('button', { name: 'Open photo 3 in lightbox: Full bathroom' }))
 
-    expect(screen.getByText('3 of 10')).toBeInTheDocument()
+    expect(screen.getByText('3 of 15')).toBeInTheDocument()
   })
 
   it('opens the Lightbox at the correct global index when a room-section photo is clicked', async () => {
     const user = userEvent.setup()
     render(<App />)
     await user.click(screen.getByRole('button', { name: /show all photos/i }))
-    // "Full kitchen" is the 3rd room in rooms.json; its one photo is global index 2 (3rd of 10 total).
+    // 5 heroPhotos occupy global indices 0-4. "Full kitchen" is the 3rd room in rooms.json;
+    // its one photo is global index 7 (8th of 15 total: 5 hero + living-room-1 + living-room-2 + full-kitchen).
     const kitchenPhotoButton = screen.getByRole('button', { name: 'Open Full kitchen in lightbox' })
     await user.click(kitchenPhotoButton)
-    expect(screen.getByText('3 of 10')).toBeInTheDocument()
+    expect(screen.getByText('8 of 15')).toBeInTheDocument()
   })
 })

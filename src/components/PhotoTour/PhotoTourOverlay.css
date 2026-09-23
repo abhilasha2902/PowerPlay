@@ -71,12 +71,24 @@
   transform: scale(0.9);
 }
 
+.photo-tour-content {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+@media (max-width: 1128px) {
+  .photo-tour-content {
+    max-width: none;
+    padding: 0 32px;
+  }
+}
+
 .photo-tour-nav-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   gap: 12px;
   margin-bottom: 40px;
-  padding: 0 32px;
 }
 
 .photo-tour-nav-item {
@@ -125,13 +137,13 @@
 }
 
 .photo-tour-room {
-  padding: 0 32px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px 60px;
   align-items: start;
   padding-top: 16px;
   padding-bottom: 4px;
+  margin-bottom: 64px;
   scroll-margin-top: 88px;
 }
 

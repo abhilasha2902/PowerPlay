@@ -73,57 +73,59 @@ export default function PhotoTourOverlay({ photos, rooms, open, onClose, onOpenL
             </div>
           </header>
 
-          <nav className="photo-tour-nav-grid" aria-label="Jump to room">
-            {rooms.map((room) => (
-              <button
-                key={room.id}
-                type="button"
-                className="photo-tour-nav-item"
-                onClick={() => scrollToRoom(room.id)}
-                aria-label={`Jump to ${room.name}`}
-              >
-                <img src={room.photos[0].url} alt="" loading="lazy" />
-                <span className="photo-tour-nav-caption" aria-hidden="true">{room.name}</span>
-              </button>
-            ))}
-          </nav>
+          <div className="photo-tour-content">
+            <nav className="photo-tour-nav-grid" aria-label="Jump to room">
+              {rooms.map((room) => (
+                <button
+                  key={room.id}
+                  type="button"
+                  className="photo-tour-nav-item"
+                  onClick={() => scrollToRoom(room.id)}
+                  aria-label={`Jump to ${room.name}`}
+                >
+                  <img src={room.thumbnailUrl} alt="" loading="lazy" />
+                  <span className="photo-tour-nav-caption" aria-hidden="true">{room.name}</span>
+                </button>
+              ))}
+            </nav>
 
-          {rooms.map((room) => {
-            const [firstPhoto, ...extraPhotos] = room.photos
-            return (
-              <section key={room.id} id={`photo-tour-room-${room.id}`} className="photo-tour-room">
-                <div className="photo-tour-room-info">
-                  <h3 className="photo-tour-room-heading">{room.name}</h3>
-                  {room.amenities && <p className="photo-tour-room-amenities">{room.amenities}</p>}
-                </div>
-                <div className="photo-tour-room-photos">
-                  <button
-                    type="button"
-                    className="photo-tour-photo"
-                    onClick={() => onOpenLightboxAt(photos.findIndex((p) => p.id === firstPhoto.id))}
-                    aria-label={`Open ${firstPhoto.alt} in lightbox`}
-                  >
-                    <img src={firstPhoto.url} alt="" loading="lazy" />
-                  </button>
-                  {extraPhotos.length > 0 && (
-                    <div className="photo-tour-room-photos-extra">
-                      {extraPhotos.map((photo) => (
-                        <button
-                          key={photo.id}
-                          type="button"
-                          className="photo-tour-photo"
-                          onClick={() => onOpenLightboxAt(photos.findIndex((p) => p.id === photo.id))}
-                          aria-label={`Open ${photo.alt} in lightbox`}
-                        >
-                          <img src={photo.url} alt="" loading="lazy" />
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </section>
-            )
-          })}
+            {rooms.map((room) => {
+              const [firstPhoto, ...extraPhotos] = room.photos
+              return (
+                <section key={room.id} id={`photo-tour-room-${room.id}`} className="photo-tour-room">
+                  <div className="photo-tour-room-info">
+                    <h3 className="photo-tour-room-heading">{room.name}</h3>
+                    {room.amenities && <p className="photo-tour-room-amenities">{room.amenities}</p>}
+                  </div>
+                  <div className="photo-tour-room-photos">
+                    <button
+                      type="button"
+                      className="photo-tour-photo"
+                      onClick={() => onOpenLightboxAt(photos.findIndex((p) => p.id === firstPhoto.id))}
+                      aria-label={`Open ${firstPhoto.alt} in lightbox`}
+                    >
+                      <img src={firstPhoto.url} alt="" loading="lazy" />
+                    </button>
+                    {extraPhotos.length > 0 && (
+                      <div className="photo-tour-room-photos-extra">
+                        {extraPhotos.map((photo) => (
+                          <button
+                            key={photo.id}
+                            type="button"
+                            className="photo-tour-photo"
+                            onClick={() => onOpenLightboxAt(photos.findIndex((p) => p.id === photo.id))}
+                            aria-label={`Open ${photo.alt} in lightbox`}
+                          >
+                            <img src={photo.url} alt="" loading="lazy" />
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </section>
+              )
+            })}
+          </div>
         </>
       )}
     </div>

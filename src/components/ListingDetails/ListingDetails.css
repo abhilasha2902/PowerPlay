@@ -1,0 +1,31 @@
+.listing-details {
+  margin-bottom: 24px;
+}
+
+.listing-details-subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+.listing-details-guests {
+  font-size: 14px;
+  color: var(--muted2);
+  margin: 4px 0 0;
+}
+
+.listing-details-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--ink);
+  margin-top: 8px;
+}
+
+.listing-details-rating svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--ink);
+}
