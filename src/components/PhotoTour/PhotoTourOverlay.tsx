@@ -1,20 +1,19 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import type { Photo } from '../../types/listing'
+import { useEffect, useRef, useState } from 'react'
+import type { Photo, Room } from '../../types/listing'
 import { useScrollLock } from '../../hooks/useScrollLock'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
 import './PhotoTourOverlay.css'
 
 interface PhotoTourOverlayProps {
   photos: Photo[]
+  rooms: Room[]
   open: boolean
   onClose: () => void
   onOpenLightboxAt: (index: number) => void
 }
 
-export default function PhotoTourOverlay({ photos, open, onClose, onOpenLightboxAt }: PhotoTourOverlayProps) {
+export default function PhotoTourOverlay({ photos, rooms, open, onClose, onOpenLightboxAt }: PhotoTourOverlayProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const categories = useMemo(() => ['All photos', ...Array.from(new Set(photos.map((p) => p.category)))], [photos])
-  const [activeCategory, setActiveCategory] = useState('All photos')
   const [shouldRender, setShouldRender] = useState(open)
 
   useScrollLock(open)
@@ -25,12 +24,8 @@ export default function PhotoTourOverlay({ photos, open, onClose, onOpenLightbox
       setShouldRender(true)
       return
     }
-    const timer = setTimeout(() => setShouldRender(false), 300) // matches the 0.3s opacity/transform transition
+    const timer = setTimeout(() => setShouldRender(false), 300)
     return () => clearTimeout(timer)
-  }, [open])
-
-  useEffect(() => {
-    if (open) setActiveCategory('All photos')
   }, [open])
 
   useEffect(() => {
@@ -42,7 +37,9 @@ export default function PhotoTourOverlay({ photos, open, onClose, onOpenLightbox
     return () => document.removeEventListener('keydown', handleKeyDown)
   }, [open, onClose])
 
-  const visiblePhotos = activeCategory === 'All photos' ? photos : photos.filter((p) => p.category === activeCategory)
+  function scrollToRoom(roomId: string) {
+    document.getElementById(`photo-tour-room-${roomId}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   return (
     <div
@@ -56,47 +53,76 @@ export default function PhotoTourOverlay({ photos, open, onClose, onOpenLightbox
       {shouldRender && (
         <>
           <header className="photo-tour-header">
-            <button type="button" className="photo-tour-close" onClick={onClose} aria-label="Close photo tour">
-              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                <line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <button type="button" className="photo-tour-icon-button photo-tour-back" onClick={onClose} aria-label="Close photo tour">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <polyline points="15 5 9 12 15 19" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
             <h2 className="photo-tour-title">Photo tour</h2>
-          </header>
-          <div className="photo-tour-body">
-            <nav className="photo-tour-nav" aria-label="Photo categories">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  type="button"
-                  className={category === activeCategory ? 'active' : ''}
-                  aria-current={category === activeCategory ? 'true' : undefined}
-                  onClick={() => setActiveCategory(category)}
-                >
-                  {category}
-                </button>
-              ))}
-            </nav>
-            <div className="photo-tour-grid">
-              {visiblePhotos.map((photo) => {
-                const globalIndex = photos.findIndex((p) => p.id === photo.id)
-                return (
-                  <button
-                    key={photo.id}
-                    type="button"
-                    className="photo-tour-thumb"
-                    onClick={() => onOpenLightboxAt(globalIndex)}
-                    aria-label={photo.alt}
-                  >
-                    <span className="photo-tour-thumb-image">
-                      <img src={photo.url} alt="" loading="lazy" />
-                    </span>
-                  </button>
-                )
-              })}
+            <div className="photo-tour-header-actions">
+              <button type="button" className="photo-tour-icon-button" aria-label="Share this listing">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path d="M12 3v12M7 8l5-5 5 5M5 15v4a2 2 0 002 2h10a2 2 0 002-2v-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <button type="button" className="photo-tour-icon-button" aria-label="Save this listing">
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                  <path d="M12 20s-7-4.35-9.5-8.5C1 8 2.5 4.5 6 4.5c2 0 3.5 1.2 4.5 2.7C11.5 5.7 13 4.5 15 4.5c3.5 0 5 3.5 3.5 7C19.5 15.65 12 20 12 20z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                </svg>
+              </button>
             </div>
-          </div>
+          </header>
+
+          <nav className="photo-tour-nav-grid" aria-label="Jump to room">
+            {rooms.map((room) => (
+              <button
+                key={room.id}
+                type="button"
+                className="photo-tour-nav-item"
+                onClick={() => scrollToRoom(room.id)}
+              >
+                <img src={room.photos[0].url} alt="" loading="lazy" />
+                <span className="photo-tour-nav-caption">{room.name}</span>
+              </button>
+            ))}
+          </nav>
+
+          {rooms.map((room) => {
+            const [firstPhoto, ...extraPhotos] = room.photos
+            return (
+              <section key={room.id} id={`photo-tour-room-${room.id}`} className="photo-tour-room">
+                <div className="photo-tour-room-info">
+                  <h3 className="photo-tour-room-heading">{room.name}</h3>
+                  {room.amenities && <p className="photo-tour-room-amenities">{room.amenities}</p>}
+                </div>
+                <div className="photo-tour-room-photos">
+                  <button
+                    type="button"
+                    className="photo-tour-photo"
+                    onClick={() => onOpenLightboxAt(photos.findIndex((p) => p.id === firstPhoto.id))}
+                    aria-label={firstPhoto.alt}
+                  >
+                    <img src={firstPhoto.url} alt="" loading="lazy" />
+                  </button>
+                  {extraPhotos.length > 0 && (
+                    <div className="photo-tour-room-photos-extra">
+                      {extraPhotos.map((photo) => (
+                        <button
+                          key={photo.id}
+                          type="button"
+                          className="photo-tour-photo"
+                          onClick={() => onOpenLightboxAt(photos.findIndex((p) => p.id === photo.id))}
+                          aria-label={photo.alt}
+                        >
+                          <img src={photo.url} alt="" loading="lazy" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </section>
+            )
+          })}
         </>
       )}
     </div>

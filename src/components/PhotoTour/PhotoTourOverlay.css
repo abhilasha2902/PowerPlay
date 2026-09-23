@@ -3,8 +3,7 @@
   inset: 0;
   z-index: 120;
   background: #ffffff;
-  display: flex;
-  flex-direction: column;
+  overflow-y: auto;
   opacity: 0;
   visibility: hidden;
   transform: translateY(28px);
@@ -23,13 +22,17 @@
 
 .photo-tour-header {
   height: 88px;
-  padding: 0 32px;
-  background: #ffffff;
-  position: relative;
-  flex-shrink: 0;
-  z-index: 5;
   display: flex;
   align-items: center;
+  padding: 0 32px;
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.photo-tour-back {
+  margin-left: -8px;
 }
 
 .photo-tour-title {
@@ -41,71 +44,42 @@
   color: var(--ink);
 }
 
-.photo-tour-close {
+.photo-tour-header-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+}
+
+.photo-tour-icon-button {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
   border: none;
   background: transparent;
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.16s;
-  font-size: 16px;
+  transition: background 0.16s, transform 0.08s;
 }
 
-.photo-tour-close:hover {
+.photo-tour-icon-button:hover {
   background: var(--grey200);
 }
 
-.photo-tour-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 0 32px 32px;
+.photo-tour-icon-button:active {
+  transform: scale(0.9);
 }
 
-.photo-tour-nav {
-  display: flex;
-  gap: 8px;
-  border-bottom: 1px solid var(--line-soft);
-  margin-bottom: 24px;
+.photo-tour-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+  padding: 0 32px;
 }
 
-.photo-tour-nav button {
-  font-size: 14px;
-  font-weight: 500;
-  padding: 22px 8px;
-  color: var(--ink);
-  text-decoration: none;
-  position: relative;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
-.photo-tour-nav button:hover {
-  color: #000000;
-}
-
-.photo-tour-nav button.active::after {
-  content: '';
-  position: absolute;
-  height: 2px;
-  background: var(--ink);
-  left: 8px;
-  right: 8px;
-  bottom: 12px;
-}
-
-.photo-tour-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.photo-tour-thumb {
-  flex-basis: calc((100% - 80px) / 5);
+.photo-tour-nav-item {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -115,26 +89,109 @@
   cursor: pointer;
 }
 
-.photo-tour-thumb-image {
+.photo-tour-nav-item img {
+  aspect-ratio: 106 / 100;
+  border-radius: 8px;
+  object-fit: cover;
+  width: 100%;
+  display: block;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), filter 0.2s;
+}
+
+.photo-tour-nav-item:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.94);
+}
+
+.photo-tour-nav-item:active img {
+  transform: scale(0.99);
+}
+
+.photo-tour-nav-caption {
+  font-size: 14px;
+  color: var(--muted2);
+}
+
+@media (max-width: 1128px) {
+  .photo-tour-nav-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 743px) {
+  .photo-tour-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.photo-tour-room {
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 60px;
+  align-items: start;
+  padding-top: 16px;
+  padding-bottom: 4px;
+}
+
+.photo-tour-room-info {
+  position: sticky;
+  top: 20px;
+}
+
+.photo-tour-room-heading {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.photo-tour-room-amenities {
+  font-size: 16px;
+  color: var(--muted2);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.photo-tour-room-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.photo-tour-room-photos-extra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.photo-tour-photo {
+  position: relative;
+  width: 100%;
   aspect-ratio: 3 / 2;
   border-radius: 8px;
   overflow: hidden;
   background: #eeeeee;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
-.photo-tour-thumb-image img {
+.photo-tour-photo img {
+  object-fit: cover;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+  display: block;
 }
 
-.photo-tour-thumb:hover .photo-tour-thumb-image img {
-  transform: scale(1.03);
-}
+@media (max-width: 1128px) {
+  .photo-tour-room {
+    grid-template-columns: 1fr;
+  }
 
-body.kbd .photo-tour-thumb-image:focus-visible,
-body.kbd .photo-tour-thumb:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
+  .photo-tour-room-info {
+    position: static;
+  }
 }
