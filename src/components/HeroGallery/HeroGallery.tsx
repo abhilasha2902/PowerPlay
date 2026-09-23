@@ -24,11 +24,10 @@ export default function HeroGallery({ photos, onShowAllPhotos, onOpenLightboxAt 
         </button>
       ))}
       <button type="button" className="show-all-photos" onClick={onShowAllPhotos}>
-        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
-          <rect x="3" y="3" width="8" height="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="13" y="3" width="8" height="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="3" y="13" width="8" height="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          <rect x="13" y="13" width="8" height="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <svg viewBox="0 0 15 15" width="15" height="15" aria-hidden="true">
+          {[2, 7.5, 13].flatMap((cy) =>
+            [2, 7.5, 13].map((cx) => <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="1.3" fill="currentColor" />)
+          )}
         </svg>
         Show all photos
       </button>
