@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { act } from 'react'
 import PhotoTourOverlay from './PhotoTourOverlay'
 import type { Photo, Room } from '../../types/listing'
 
@@ -31,7 +32,7 @@ describe('PhotoTourOverlay', () => {
 
   it('renders one thumbnail-nav button per room', () => {
     render(<PhotoTourOverlay photos={photos} rooms={rooms} open={true} onClose={vi.fn()} onOpenLightboxAt={vi.fn()} />)
-    expect(screen.getAllByRole('button', { name: /^(Room A|Room B)$/ })).toHaveLength(2)
+    expect(screen.getAllByRole('button', { name: /^Jump to (Room A|Room B)$/ })).toHaveLength(2)
   })
 
   it('clicking a thumbnail-nav button does NOT open the lightbox', async () => {
@@ -40,7 +41,7 @@ describe('PhotoTourOverlay', () => {
     // jsdom doesn't implement scrollIntoView; stub it so the click handler doesn't throw
     Element.prototype.scrollIntoView = vi.fn()
     render(<PhotoTourOverlay photos={photos} rooms={rooms} open={true} onClose={vi.fn()} onOpenLightboxAt={onOpenLightboxAt} />)
-    await user.click(screen.getByRole('button', { name: 'Room B' }))
+    await user.click(screen.getByRole('button', { name: 'Jump to Room B' }))
     expect(onOpenLightboxAt).not.toHaveBeenCalled()
   })
 
@@ -48,7 +49,7 @@ describe('PhotoTourOverlay', () => {
     const user = userEvent.setup()
     const onOpenLightboxAt = vi.fn()
     render(<PhotoTourOverlay photos={photos} rooms={rooms} open={true} onClose={vi.fn()} onOpenLightboxAt={onOpenLightboxAt} />)
-    await user.click(screen.getByRole('button', { name: 'Room B photo 2' }))
+    await user.click(screen.getByRole('button', { name: 'Open Room B photo 2 in lightbox' }))
     expect(onOpenLightboxAt).toHaveBeenCalledWith(2)
   })
 
@@ -57,5 +58,37 @@ describe('PhotoTourOverlay', () => {
     render(<PhotoTourOverlay photos={photos} rooms={roomsWithNoAmenities} open={true} onClose={vi.fn()} onOpenLightboxAt={vi.fn()} />)
     expect(screen.getByText('Sofa · TV')).toBeInTheDocument()
     expect(screen.getAllByRole('heading', { name: 'Extra' })).toHaveLength(1)
+  })
+
+  describe('close fade-out', () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+    })
+
+    afterEach(() => {
+      vi.useRealTimers()
+    })
+
+    it('keeps content mounted immediately after open becomes false, then unmounts after the fade duration', () => {
+      const { rerender } = render(
+        <PhotoTourOverlay photos={photos} rooms={rooms} open={true} onClose={vi.fn()} onOpenLightboxAt={vi.fn()} />
+      )
+      expect(screen.getByText('Photo tour')).toBeInTheDocument()
+
+      rerender(
+        <PhotoTourOverlay photos={photos} rooms={rooms} open={false} onClose={vi.fn()} onOpenLightboxAt={vi.fn()} />
+      )
+
+      // Content is still present immediately after `open` flips false, so the
+      // overlay's opacity transition has something to fade rather than
+      // popping to an empty rectangle.
+      expect(screen.getByText('Photo tour')).toBeInTheDocument()
+
+      act(() => {
+        vi.advanceTimersByTime(300)
+      })
+
+      expect(screen.queryByText('Photo tour')).not.toBeInTheDocument()
+    })
   })
 })

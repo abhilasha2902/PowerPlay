@@ -8,11 +8,12 @@ interface LightboxOverlayProps {
   photos: Photo[]
   open: boolean
   index: number
+  isPhotoTourOpen: boolean
   onClose: () => void
   onNavigate: (index: number) => void
 }
 
-export default function LightboxOverlay({ photos, open, index, onClose, onNavigate }: LightboxOverlayProps) {
+export default function LightboxOverlay({ photos, open, index, isPhotoTourOpen, onClose, onNavigate }: LightboxOverlayProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const photo = photos[index]
@@ -59,7 +60,7 @@ export default function LightboxOverlay({ photos, open, index, onClose, onNaviga
       {shouldRender && (
         <>
           <header className="lightbox-header">
-            <button type="button" className="lightbox-icon-button" onClick={onClose} aria-label="Back to photo tour">
+            <button type="button" className="lightbox-icon-button" onClick={onClose} aria-label={isPhotoTourOpen ? 'Back to photo tour' : 'Close lightbox'}>
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <rect x="3" y="3" width="7" height="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
                 <rect x="14" y="3" width="7" height="7" fill="none" stroke="currentColor" strokeWidth="1.5" />

@@ -80,9 +80,10 @@ export default function PhotoTourOverlay({ photos, rooms, open, onClose, onOpenL
                 type="button"
                 className="photo-tour-nav-item"
                 onClick={() => scrollToRoom(room.id)}
+                aria-label={`Jump to ${room.name}`}
               >
                 <img src={room.photos[0].url} alt="" loading="lazy" />
-                <span className="photo-tour-nav-caption">{room.name}</span>
+                <span className="photo-tour-nav-caption" aria-hidden="true">{room.name}</span>
               </button>
             ))}
           </nav>
@@ -100,7 +101,7 @@ export default function PhotoTourOverlay({ photos, rooms, open, onClose, onOpenL
                     type="button"
                     className="photo-tour-photo"
                     onClick={() => onOpenLightboxAt(photos.findIndex((p) => p.id === firstPhoto.id))}
-                    aria-label={firstPhoto.alt}
+                    aria-label={`Open ${firstPhoto.alt} in lightbox`}
                   >
                     <img src={firstPhoto.url} alt="" loading="lazy" />
                   </button>
@@ -112,7 +113,7 @@ export default function PhotoTourOverlay({ photos, rooms, open, onClose, onOpenL
                           type="button"
                           className="photo-tour-photo"
                           onClick={() => onOpenLightboxAt(photos.findIndex((p) => p.id === photo.id))}
-                          aria-label={photo.alt}
+                          aria-label={`Open ${photo.alt} in lightbox`}
                         >
                           <img src={photo.url} alt="" loading="lazy" />
                         </button>

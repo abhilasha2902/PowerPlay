@@ -6,7 +6,18 @@ import ListingHeader from './ListingHeader'
 describe('ListingHeader', () => {
   it('toggles the Save button\'s pressed state and heart fill on click', async () => {
     const user = userEvent.setup()
-    render(<ListingHeader title="Test" propertyType="Test type" rating={4.5} reviewCount={10} />)
+    render(
+      <ListingHeader
+        title="Test"
+        propertyType="Test type"
+        guests={3}
+        bedrooms={1}
+        beds={1}
+        bathrooms={1}
+        rating={4.5}
+        reviewCount={10}
+      />
+    )
     const saveButton = screen.getByRole('button', { name: /save/i })
     expect(saveButton).toHaveAttribute('aria-pressed', 'false')
     await user.click(saveButton)

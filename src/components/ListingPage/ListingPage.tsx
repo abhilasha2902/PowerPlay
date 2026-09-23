@@ -26,6 +26,10 @@ export default function ListingPage({ listing, photos, onShowAllPhotos, onOpenLi
             <ListingHeader
               title={listing.title}
               propertyType={listing.propertyType}
+              guests={listing.guests}
+              bedrooms={listing.bedrooms}
+              beds={listing.beds}
+              bathrooms={listing.bathrooms}
               rating={listing.rating}
               reviewCount={listing.reviewCount}
             />

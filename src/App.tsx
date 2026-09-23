@@ -49,6 +49,7 @@ export default function App() {
         photos={photos}
         open={lightboxOpen}
         index={lightboxIndex}
+        isPhotoTourOpen={photoTourOpen}
         onClose={() => setLightboxOpen(false)}
         onNavigate={setLightboxIndex}
       />

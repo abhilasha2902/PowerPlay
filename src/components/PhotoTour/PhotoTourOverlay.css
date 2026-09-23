@@ -132,11 +132,12 @@
   align-items: start;
   padding-top: 16px;
   padding-bottom: 4px;
+  scroll-margin-top: 88px;
 }
 
 .photo-tour-room-info {
   position: sticky;
-  top: 20px;
+  top: 108px;
 }
 
 .photo-tour-room-heading {

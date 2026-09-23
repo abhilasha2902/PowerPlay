@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen, within } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from './App'
 
@@ -9,9 +9,9 @@ describe('App', () => {
     render(<App />)
 
     await user.click(screen.getByRole('button', { name: /Show all photos/i }))
-    // Scope to the room section (not the nav-grid thumbnail, which shares the same accessible name).
-    const livingRoomSection = document.getElementById('photo-tour-room-living-room-1')!
-    await user.click(within(livingRoomSection).getByRole('button', { name: 'Living room 1' }))
+    // "Open Living room 1 in lightbox" (room-section photo button) is now distinct from
+    // "Jump to Living room 1" (nav-grid thumbnail), so no scoping is needed to disambiguate.
+    await user.click(screen.getByRole('button', { name: 'Open Living room 1 in lightbox' }))
 
     // Both overlays are open: Photo Tour underneath, Lightbox on top.
     expect(screen.getAllByRole('dialog')).toHaveLength(2)
@@ -40,8 +40,7 @@ describe('App', () => {
     render(<App />)
     await user.click(screen.getByRole('button', { name: /show all photos/i }))
     // "Full kitchen" is the 3rd room in rooms.json; its one photo is global index 2 (3rd of 10 total).
-    const kitchenSection = document.getElementById('photo-tour-room-full-kitchen')!
-    const kitchenPhotoButton = within(kitchenSection).getByRole('button', { name: 'Full kitchen' })
+    const kitchenPhotoButton = screen.getByRole('button', { name: 'Open Full kitchen in lightbox' })
     await user.click(kitchenPhotoButton)
     expect(screen.getByText('3 of 10')).toBeInTheDocument()
   })

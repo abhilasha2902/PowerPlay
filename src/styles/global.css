@@ -39,7 +39,7 @@ body.kbd button:focus-visible {
 }
 
 body.kbd .navbar-icon-button:focus-visible,
-body.kbd .photo-tour-close:focus-visible,
+body.kbd .photo-tour-icon-button:focus-visible,
 body.kbd .lightbox-icon-button:focus-visible,
 body.kbd .lightbox-arrow:focus-visible {
   border-radius: 50%;

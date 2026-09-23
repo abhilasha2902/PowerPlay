@@ -21,6 +21,12 @@
   margin: 0;
 }
 
+.listing-header-details {
+  font-size: 14px;
+  color: var(--muted2);
+  margin: 4px 0 0;
+}
+
 .listing-header-rating {
   display: inline-flex;
   align-items: center;

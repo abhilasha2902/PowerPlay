@@ -13,14 +13,14 @@ const photos: Photo[] = [
 
 describe('LightboxOverlay', () => {
   it('shows the counter for the current index', () => {
-    render(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
+    render(<LightboxOverlay photos={photos} open={true} index={0} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={vi.fn()} />)
     expect(screen.getByText('1 of 3')).toBeInTheDocument()
   })
 
   it('calls onNavigate with the next index on ArrowRight', async () => {
     const user = userEvent.setup()
     const onNavigate = vi.fn()
-    render(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={onNavigate} />)
+    render(<LightboxOverlay photos={photos} open={true} index={0} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={onNavigate} />)
     await user.keyboard('{ArrowRight}')
     expect(onNavigate).toHaveBeenCalledWith(1)
   })
@@ -28,7 +28,7 @@ describe('LightboxOverlay', () => {
   it('calls onNavigate with the previous index on ArrowLeft', async () => {
     const user = userEvent.setup()
     const onNavigate = vi.fn()
-    render(<LightboxOverlay photos={photos} open={true} index={1} onClose={vi.fn()} onNavigate={onNavigate} />)
+    render(<LightboxOverlay photos={photos} open={true} index={1} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={onNavigate} />)
     await user.keyboard('{ArrowLeft}')
     expect(onNavigate).toHaveBeenCalledWith(0)
   })
@@ -36,7 +36,7 @@ describe('LightboxOverlay', () => {
   it('does not navigate past the last photo on ArrowRight', async () => {
     const user = userEvent.setup()
     const onNavigate = vi.fn()
-    render(<LightboxOverlay photos={photos} open={true} index={2} onClose={vi.fn()} onNavigate={onNavigate} />)
+    render(<LightboxOverlay photos={photos} open={true} index={2} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={onNavigate} />)
     await user.keyboard('{ArrowRight}')
     expect(onNavigate).not.toHaveBeenCalled()
   })
@@ -44,7 +44,7 @@ describe('LightboxOverlay', () => {
   it('calls onClose on Escape', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
-    render(<LightboxOverlay photos={photos} open={true} index={0} onClose={onClose} onNavigate={vi.fn()} />)
+    render(<LightboxOverlay photos={photos} open={true} index={0} isPhotoTourOpen={false} onClose={onClose} onNavigate={vi.fn()} />)
     await user.keyboard('{Escape}')
     expect(onClose).toHaveBeenCalledTimes(1)
   })
@@ -56,10 +56,10 @@ describe('LightboxOverlay', () => {
     // render, so it can't exercise the bug that the closed->open rerender
     // does: shouldRender starts false and only flips true a render later).
     const { rerender } = render(
-      <LightboxOverlay photos={photos} open={false} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />
+      <LightboxOverlay photos={photos} open={false} index={0} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={vi.fn()} />
     )
 
-    rerender(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
+    rerender(<LightboxOverlay photos={photos} open={true} index={0} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={vi.fn()} />)
 
     const dialog = screen.getByRole('dialog')
     expect(dialog).toContainElement(document.activeElement as HTMLElement)
@@ -67,18 +67,20 @@ describe('LightboxOverlay', () => {
   })
 
   it('focuses the Close button (not the back-to-photo-tour button) when opened via keyboard', () => {
+    // isPhotoTourOpen={true} here so the left header button keeps its
+    // "Back to photo tour" label, matching what this test asserts on.
     const { rerender } = render(
-      <LightboxOverlay photos={photos} open={false} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />
+      <LightboxOverlay photos={photos} open={false} index={0} isPhotoTourOpen={true} onClose={vi.fn()} onNavigate={vi.fn()} />
     )
 
-    rerender(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
+    rerender(<LightboxOverlay photos={photos} open={true} index={0} isPhotoTourOpen={true} onClose={vi.fn()} onNavigate={vi.fn()} />)
 
     expect(screen.getByRole('button', { name: 'Close lightbox' })).toHaveFocus()
     expect(screen.getByRole('button', { name: 'Back to photo tour' })).not.toHaveFocus()
   })
 
   it('keeps the last-photo Next arrow focusable (aria-disabled, not disabled) so focus cannot escape the trap', () => {
-    render(<LightboxOverlay photos={photos} open={true} index={2} onClose={vi.fn()} onNavigate={vi.fn()} />)
+    render(<LightboxOverlay photos={photos} open={true} index={2} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={vi.fn()} />)
     const nextButton = screen.getByRole('button', { name: 'Next photo' })
     expect(nextButton).not.toBeDisabled()
     expect(nextButton).toHaveAttribute('aria-disabled', 'true')
@@ -87,7 +89,7 @@ describe('LightboxOverlay', () => {
   it('does not call onNavigate when clicking the Previous arrow at the first photo', async () => {
     const user = userEvent.setup()
     const onNavigate = vi.fn()
-    render(<LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={onNavigate} />)
+    render(<LightboxOverlay photos={photos} open={true} index={0} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={onNavigate} />)
     await user.click(screen.getByRole('button', { name: 'Previous photo' }))
     expect(onNavigate).not.toHaveBeenCalled()
   })
@@ -95,9 +97,23 @@ describe('LightboxOverlay', () => {
   it('does not call onNavigate when clicking the Next arrow at the last photo', async () => {
     const user = userEvent.setup()
     const onNavigate = vi.fn()
-    render(<LightboxOverlay photos={photos} open={true} index={2} onClose={vi.fn()} onNavigate={onNavigate} />)
+    render(<LightboxOverlay photos={photos} open={true} index={2} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={onNavigate} />)
     await user.click(screen.getByRole('button', { name: 'Next photo' }))
     expect(onNavigate).not.toHaveBeenCalled()
+  })
+
+  describe('back button label', () => {
+    it('reads "Back to photo tour" when opened from within an open Photo Tour', () => {
+      render(<LightboxOverlay photos={photos} open={true} index={0} isPhotoTourOpen={true} onClose={vi.fn()} onNavigate={vi.fn()} />)
+      expect(screen.getByRole('button', { name: 'Back to photo tour' })).toBeInTheDocument()
+    })
+
+    it('reads "Close lightbox" when opened directly (no Photo Tour open)', () => {
+      render(<LightboxOverlay photos={photos} open={true} index={0} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={vi.fn()} />)
+      expect(screen.queryByRole('button', { name: 'Back to photo tour' })).not.toBeInTheDocument()
+      // Both header buttons now read "Close lightbox".
+      expect(screen.getAllByRole('button', { name: 'Close lightbox' })).toHaveLength(2)
+    })
   })
 
   describe('close fade-out', () => {
@@ -111,11 +127,11 @@ describe('LightboxOverlay', () => {
 
     it('keeps content mounted immediately after open becomes false, then unmounts after the fade duration', () => {
       const { rerender } = render(
-        <LightboxOverlay photos={photos} open={true} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />
+        <LightboxOverlay photos={photos} open={true} index={0} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={vi.fn()} />
       )
       expect(screen.getByText('1 of 3')).toBeInTheDocument()
 
-      rerender(<LightboxOverlay photos={photos} open={false} index={0} onClose={vi.fn()} onNavigate={vi.fn()} />)
+      rerender(<LightboxOverlay photos={photos} open={false} index={0} isPhotoTourOpen={false} onClose={vi.fn()} onNavigate={vi.fn()} />)
 
       // Content is still present immediately after `open` flips false, so the
       // container's opacity transition has something to fade rather than
