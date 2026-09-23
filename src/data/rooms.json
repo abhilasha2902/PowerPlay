@@ -1,0 +1,75 @@
+[
+  {
+    "id": "living-room-1",
+    "name": "Living room 1",
+    "amenities": "Sofa · Air conditioning · Ceiling fan · TV",
+    "photos": [
+      { "id": "living-room-1-1", "url": "https://images.unsplash.com/photo-1758448755856-01d3add0177b?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Living room 1", "category": "Living room 1" }
+    ]
+  },
+  {
+    "id": "living-room-2",
+    "name": "Living room 2",
+    "amenities": "Ceiling fan · Hot tub",
+    "photos": [
+      { "id": "living-room-2-1", "url": "https://images.unsplash.com/photo-1749930206000-179d0b85aa7e?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Living room 2", "category": "Living room 2" }
+    ]
+  },
+  {
+    "id": "full-kitchen",
+    "name": "Full kitchen",
+    "amenities": "Refrigerator · Microwave · Cooking basics",
+    "photos": [
+      { "id": "full-kitchen-1", "url": "https://images.unsplash.com/photo-1764526624453-db32c24eca55?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Full kitchen", "category": "Full kitchen" }
+    ]
+  },
+  {
+    "id": "bedroom",
+    "name": "Bedroom",
+    "amenities": "Bed · Air conditioning · Wardrobe",
+    "photos": [
+      { "id": "bedroom-1", "url": "https://images.unsplash.com/photo-1746549855427-57e6da7040db?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Bedroom", "category": "Bedroom" }
+    ]
+  },
+  {
+    "id": "full-bathroom",
+    "name": "Full bathroom",
+    "amenities": "Bathtub · Hot water · Hair dryer",
+    "photos": [
+      { "id": "full-bathroom-1", "url": "https://images.unsplash.com/photo-1754574741164-a41418029cfb?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Full bathroom", "category": "Full bathroom" }
+    ]
+  },
+  {
+    "id": "gym",
+    "name": "Gym",
+    "amenities": "Exercise equipment",
+    "photos": [
+      { "id": "gym-1", "url": "https://images.unsplash.com/photo-1758957646695-ec8bce3df462?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Gym", "category": "Gym" }
+    ]
+  },
+  {
+    "id": "exterior",
+    "name": "Exterior",
+    "amenities": "Garden view · Parking",
+    "photos": [
+      { "id": "exterior-1", "url": "https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Exterior", "category": "Exterior" }
+    ]
+  },
+  {
+    "id": "pool",
+    "name": "Pool",
+    "amenities": "Pool",
+    "photos": [
+      { "id": "pool-1", "url": "https://images.unsplash.com/photo-1680013995061-2d6d1f3ab417?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Pool", "category": "Pool" }
+    ]
+  },
+  {
+    "id": "additional-photos",
+    "name": "Additional photos",
+    "amenities": null,
+    "photos": [
+      { "id": "additional-1", "url": "https://images.unsplash.com/photo-1645587593689-e7cde7c5d9db?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Additional photo 1", "category": "Additional photos" },
+      { "id": "additional-2", "url": "https://images.unsplash.com/photo-1721815693498-cc28507c0ba2?fm=jpg&q=80&w=1600&auto=format&fit=crop", "alt": "Additional photo 2", "category": "Additional photos" }
+    ]
+  }
+]
