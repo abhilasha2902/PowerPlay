@@ -59,3 +59,10 @@
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+@media (max-width: 743px) {
+  .listing-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

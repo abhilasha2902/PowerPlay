@@ -83,6 +83,7 @@ body.kbd .hero-cell:focus-visible {
 
 @media (max-width: 743px) {
   .hero-gallery {
+    aspect-ratio: auto;
     grid-template-columns: 1fr;
     grid-template-rows: 280px;
     height: 280px;

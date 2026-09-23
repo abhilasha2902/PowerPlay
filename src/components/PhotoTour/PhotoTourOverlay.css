@@ -84,6 +84,12 @@
   }
 }
 
+@media (max-width: 743px) {
+  .photo-tour-content {
+    padding: 0 20px;
+  }
+}
+
 .photo-tour-nav-grid {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
