@@ -12,7 +12,14 @@ export default function Navbar() {
         </button>
 
         <div className="navbar-search" role="search">
-          <button type="button" className="navbar-search-segment">Anywhere</button>
+          <button type="button" className="navbar-search-segment">
+            <svg className="navbar-search-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path d="M3 11.5 12 4l9 7.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M5.5 10v8.5a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1V10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M10 19.5V14h4v5.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Anywhere
+          </button>
           <span className="navbar-search-divider" aria-hidden="true" />
           <button type="button" className="navbar-search-segment">Anytime</button>
           <span className="navbar-search-divider" aria-hidden="true" />
