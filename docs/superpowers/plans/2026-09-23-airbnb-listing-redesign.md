@@ -1361,9 +1361,54 @@ git commit -m "feat: wire App.tsx to the new room-based data model and Photo Tou
 
 ---
 
+### Task 21: Fix ReserveWidget Currency Symbol (INR)
+
+**Found by the controller during Task 20's post-merge visual verification** — a real gap in this plan, not any implementer's fault. Task 13 set `Listing.pricePerNight` to a numeric INR value, and this plan's own Self-Review Notes even flagged "match the reference currency display" as a requirement, but no task actually touched `ReserveWidget.tsx`'s three hardcoded `$` literals. Verified live: the running app showed "$4200" instead of INR.
+
+**Files:**
+- Modify: `src/components/ReserveWidget/ReserveWidget.tsx`
+
+**Interfaces:** unchanged (`pricePerNight, nights, rating, reviewCount`).
+
+- [ ] **Step 1: Replace all three `$` literals with `₹` and Indian-style number grouping**
+
+Current (3 occurrences):
+```tsx
+        <span className="reserve-widget-price">${pricePerNight}</span>
+```
+```tsx
+        <span>${pricePerNight} x {nights} nights</span>
+        <span>${total}</span>
+```
+
+Change to:
+```tsx
+        <span className="reserve-widget-price">₹{pricePerNight.toLocaleString('en-IN')}</span>
+```
+```tsx
+        <span>₹{pricePerNight.toLocaleString('en-IN')} x {nights} nights</span>
+        <span>₹{total.toLocaleString('en-IN')}</span>
+```
+
+(`toLocaleString('en-IN')` produces Indian-style digit grouping, e.g. `4,200` and `21,000` — matches "match the reference currency display" better than a plain unformatted number.)
+
+- [ ] **Step 2: Run tests and build**
+
+Run: `npm run test && npm run build`
+Expected: both pass. Check whether any existing test (`App.test.tsx` or a `ReserveWidget` test, if one exists) asserts on the old `$` text — update it to `₹` with the formatted number if so.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add src/components/ReserveWidget/ReserveWidget.tsx
+git commit -m "fix: display price in INR (₹) instead of USD (\$) per v2 spec"
+```
+
+---
+
 ## Self-Review Notes
 
-- **Spec coverage:** All 7 numbered sections of the user's v2 spec are covered: CSS custom properties (already present, verified, no task needed) → Task 13 note; Navbar → Task 14; Title+Share/Save row → Task 15; Hero Gallery → Task 16; two-column layout → Task 17; Photo Tour → Task 18; Lightbox → Task 19; mock data → Task 13/20.
+- **Spec coverage:** All 7 numbered sections of the user's v2 spec are covered: CSS custom properties (already present, verified, no task needed) → Task 13 note; Navbar → Task 14; Title+Share/Save row → Task 15; Hero Gallery → Task 16; two-column layout → Task 17; Photo Tour → Task 18; Lightbox → Task 19; mock data → Task 13/20/21 (Task 21 added post-hoc after a real gap was caught live — see its own header note).
 - **Deviations from the user's literal spec, both explicitly authorized in chat before this plan was written:** the real Airbnb Bélo logo → generic wordmark + flame icon; live-reference-site scraped photo URLs → verified real Unsplash URLs. Both documented in this plan's header.
 - **Unresolved from the spec, flagged rather than guessed:** exact nightly price in INR (spec said "use INR, match the reference currency display" but gave no number) — placeholder ₹4,200 used, flagged in Task 13 for the user to correct if they have an exact figure.
 - **Placeholder scan:** no TBD/TODO markers; every step has runnable code.
